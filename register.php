@@ -29,7 +29,7 @@
 
 	$uiderr=$pswderr=$reperr=$nmerr="";
     $uid=$pswd=$RePass=$nm="";
-    $boo= false;//this is our flag to make sure registration is legit
+    $boo= true; //this is our flag to make sure registration is legit
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
 	    if(empty($_POST["uid"]))
@@ -74,15 +74,14 @@
 	    	$RePass=chngIP($_POST["RePass"]);
 	    }//Repeat Password
 
-	    if (boo && $pswd != "" && $RePass != "") 
+	    if ($boo && $pswd != "" && $RePass != "") 
 	    {
 	    	if (strcmp($pswd, $RePass) !== 0) 
 	    	{
 	    		$boo = false;
 	    		$reperr= "Passwords Do Not match";
 	    	}
-	    	else
-	    		$boo = true;
+	    	
 	    }// Passwords don't match
 		echo "no problem in check and changeIP<br>";
 	    send_data($boo);
