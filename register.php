@@ -84,9 +84,11 @@
 	    	
 	    }// Passwords don't match
 		echo "no problem in check and changeIP<br>";
-	    send_data($boo,$uid,$nm,$pswd);
+	    send_data($boo,$uid,$nm,$pswd);//passing the globals because otherwise it's a pain in the ass
 	    
 	}//if for emptyData ends here
+
+	/* By the end of this we've verified data and have sent it to our sending function. I'll see how we can make this smaller once we get further along. For now it works and I'll find ways to imporve efficiency if time permits*/
 
 
 	function chngIP($data)
@@ -96,7 +98,7 @@
             $data = htmlspecialchars($data);
             return $data;
 
-        }//this rmoves trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh
+        }//this removes trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh but it sorta removes the special characters if the user adds any.
         function send_data($bleh,$usr,$name,$pass)
         { 
         	echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
@@ -104,19 +106,17 @@
 	    	{
 		    	$qry = "INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES (?, ?, ?)";
 		    	echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
-		    	$prepStmt = $GLOBALS['conn']->prepare($qry);
+		    	$prepStmt = $GLOBALS['conn']->prepare($qry);//This works simliar to the Java thingy where we create a prepared statement.
 		    	echo "Query is prepared <br>";
 
 		    	//First we check if username already exists
 		    	$chkQu = "SELECT `uid` FROM `login` WHERE `uid` LIKE ".$uid;
-		    	// $chkStmt =  $GLOBALS['conn']->($chkQu);
-		    	// $chkStmt->bind_param("s",$uid);
-		    	// echo "Prepared second query <br>";
 		    	$res = $GLOBALS['conn']->query($chkQu);
-		    	echo "Exectued first Check<br>";
+		    	//echo "Exectued first Check<br>";
 		    	if (!($res->num_rows != 0))
 		    	{
-		    		echo "Entered if after first fetch <br>";
+		    		//echo "Entered if after first fetch <br>";
+		    		$pass = password_hash($pass, PASSWORD_DEFAULT); //I encrypt the passwords here so they're not plain text but are hashes instead. This basically gives us additional security
 		    		$prepStmt->bind_param("sss",$usr,$pass,$name);
 		    		echo "Statement prepared lol <br>";
 		    		$prepStmt->execute();
