@@ -28,7 +28,7 @@
 	echo "Connected successfully <br>";
 
 	$uiderr=$pswderr=$reperr=$nmerr="";
-    $uid=$pswd=$RePass=$nm="";
+    $uid=$pswd=$RePass=$nm="aa";
     $boo= true; //this is our flag to make sure registration is legit
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
@@ -39,7 +39,7 @@
 	    }
 	    else
 	    {
-	    	$uid=chngIP($_POST["nm"]);
+	    	$uid=chngIP($_POST["uid"]);
 	    }//UID
 
 
@@ -84,7 +84,7 @@
 	    	
 	    }// Passwords don't match
 		echo "no problem in check and changeIP<br>";
-	    send_data($boo);
+	    send_data($boo,$uid,$nm,$pswd);
 	    
 	}//if for emptyData ends here
 
@@ -97,43 +97,50 @@
             return $data;
 
         }//this rmoves trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh
-        function send_data($bleh)
-    {
-    	if($bleh)
-    	{
-	    	$qry = "INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES ('?', '?', '?')";
-	    	$prepStmt = $conn->prepare($qry);
-
-	    	//First we check if username already exists
-	    	$chkQu = "SELECT `uid` FROM `login` WHERE `uid` LIKE '?'";
-	    	$chkStmt =  $conn->prepare($chkQu);
-	    	$chkStmt->bind_param($uid);
-	    	$res = $chkQu->query();
-	    	if ($res->num_rows == 0)
+        function send_data($bleh,$usr,$name,$pass)
+        { 
+        	echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
+	    	if($bleh)
 	    	{
-	    		$prepStmt->bind_param($uid,$pswd,$nm);
-	    		if($prepStmt->query())
-	    			echo "Account Created Successfully";
-	    		else
-	    			echo "Account not Created";
-	    	}//User id is not in use
-	    	else
-	    		$uiderr = "User ID is in use";
-	    	$conn->close();
-		}
+		    	$qry = "INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES (?, ?, ?)";
+		    	echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
+		    	$prepStmt = $GLOBALS['conn']->prepare($qry);
+		    	echo "Query is prepared <br>";
 
-    }//send_data
+		    	//First we check if username already exists
+		    	$chkQu = "SELECT `uid` FROM `login` WHERE `uid` LIKE ".$uid;
+		    	// $chkStmt =  $GLOBALS['conn']->($chkQu);
+		    	// $chkStmt->bind_param("s",$uid);
+		    	// echo "Prepared second query <br>";
+		    	$res = $GLOBALS['conn']->query($chkQu);
+		    	echo "Exectued first Check<br>";
+		    	if (!($res->num_rows != 0))
+		    	{
+		    		echo "Entered if after first fetch <br>";
+		    		$prepStmt->bind_param("sss",$usr,$pass,$name);
+		    		echo "Statement prepared lol <br>";
+		    		$prepStmt->execute();
+		    		echo "Account Created Successfully";
+		    		// else
+		    		// 	echo "Account not Created";
+		    	}//User id is not in use
+		    	else
+		    		$uiderr = "User ID is in use";
+		    	$GLOBALS['conn']->close();
+			}
+
+    	}//send_data
 	echo "hello";
     ?> 
 	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 	<!-- <form name="HenloFrens" method = "post" > -->
-		<label >Name </label>
+		<label >Nayme </label>
 		<input type="text" name="nm" placeholder="Your name..." size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">* <?php echo $nmerr;?></span>	
 		<br>
 
 		<label >User ID</label>
-		<input type="text" name="uid" placeholder="User ID" size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
+		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">*  <?php echo $usrerr;?> </span>	
 		<br>
 
@@ -156,4 +163,3 @@
 echo "<br>end of the line"
 ?>
 </html>
-
