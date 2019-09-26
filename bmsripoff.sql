@@ -3,14 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2019 at 05:00 PM
+-- Generation Time: Sep 26, 2019 at 07:08 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+5:30";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,6 +21,25 @@ SET time_zone = "+5:30";
 --
 -- Database: `bmsripoff`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_log`
+--
+
+CREATE TABLE `admin_log` (
+  `Admin` varchar(200) NOT NULL,
+  `Pass` varchar(500) NOT NULL,
+  `Name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin_log`
+--
+
+INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
+('AllenNo1', '$2y$10$9j/RKOFi19epwxDSDuOGO.Tkh6DlNRRdflSzlSh.HDqlOZCshg/IG', 'Allleeeeeen');
 
 -- --------------------------------------------------------
 
@@ -54,9 +73,19 @@ CREATE TABLE `deets` (
 
 CREATE TABLE `login` (
   `uid` varchar(50) NOT NULL,
-  `pass` varchar(50) NOT NULL,
+  `pass` varchar(500) NOT NULL,
   `Name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This is the Table with Login details for the user';
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES
+('a', '$2y$10$4107pumym.QzMGuC4.i5JOP5PUIsThPKTf3m./ZKekADmrf.K/hSm', 'a'),
+('cse123', '$2y$10$a1sEsVMy.bFcmFyZnee1ROpwObcE3X2byS6xs76IjMTYE0tl7DkMa', 'sjbit'),
+('gg69', '$2y$10$RvWQmEaxGuWsw/9aq6V6suYM78Qa6xtu2VRBCeaVGbExIBjjaKgra', 'Gaurav'),
+('vru', '$2y$10$AkOXvS84SrQj0kytPnqzcejXxCgFX9l5.UiJ1Bd6xTA4EXx1mugV.', 'Varuni');
 
 -- --------------------------------------------------------
 
@@ -85,6 +114,12 @@ CREATE TABLE `s1` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_log`
+--
+ALTER TABLE `admin_log`
+  ADD PRIMARY KEY (`Admin`(50));
 
 --
 -- Indexes for table `bookings`
