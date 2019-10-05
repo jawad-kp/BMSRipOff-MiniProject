@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete a Movie from the Roster</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width= device-width, initial-scale=1">
+  	<style type="text/css">
+  		.error{ color: red; font-size: 16px }
+  	</style>
+</head>
+<body>
+	<?php
+	$servername = "127.0.0.1";
+	$username = "root";
+	$db = "bmsripoff";
+	$password = "";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
+
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+	//echo "Connected successfully <br>";
+
+	$mverr="";
+    $mvnm="";
+    $boo= true; //flag for the form
+	if ($_SERVER["REQUEST_METHOD"] == "POST") 
+	{
+	    if(empty($_POST["mvnm"]))
+	    {
+	        $mverr="Please enter a Movie Name";
+	        $boo = false;
+	    }
+	    else
+	    {
+	    	$mvnm=chngIP($_POST["mvnm"]);
+	    }//Movie's Name
+
+	    send_data($boo, $mvnm);
+	}
+
+	function chngIP($data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+
+        }//Modifies input for use
+	function send_data($bleh,$MovieName)
+        { 
+        	echo "Entered send_data with value: ".$bleh."<br>"."Movie's Name: ".$MovieName."<br>";
+
+   			if($bleh)
+   			{
+   				$qry = "DELETE FROM `deets` WHERE `deets`.`Name` LIKE '".$MovieName."'";//The Delete Query
+				$valT = $GLOBALS['conn']->query($qry);
+   				if ($valT === TRUE) 
+   				{
+   				echo "Deleted Record Successfully";
+   				}
+   				else
+   				{
+   					echo "Did not delete record: ".$GLOBALS['conn']->error;//Prints error in case query doesn't work
+   				}
+
+   				$GLOBALS['conn']->close();
+   			}
+   		}
+	?>
+
+	<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
+		<label > Movie's Name :</label>
+		<input type="text" name="mvnm" placeholder="Movie's Name" style="width: 300px; height: 30px; border-radius: 5px;">
+		<span class="error">* <?php echo $mverr;?></span>	
+		<br>
+
+		<button type="submit">Submit</button>	
+
+	</form>
+
+</body>
+</html>
