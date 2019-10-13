@@ -74,7 +74,20 @@
 
 	<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 		<label > Movie's Name :</label>
-		<input type="text" name="mvnm" placeholder="Movie's Name" style="width: 300px; height: 30px; border-radius: 5px;">
+		<!-- <input type="text" name="mvnm" placeholder="Movie's Name" style="width: 300px; height: 30px; border-radius: 5px;"> -->
+
+		<select name="mvnm">
+					<option value="" selected>Select a Movie </option>
+				<?php
+					$sql = "SELECT Name FROM `deets`";
+					$NmList = $conn->query($sql);
+					while($row = $NmList->fetch_assoc()) 
+					{
+						echo "<option value=\"".$row["Name"]."\">".$row["Name"]."</option>";
+						//This should generate a list of available movies and makes sure you select only a movie that's been added
+					}
+				  ?> 
+				</select>
 		<span class="error">* <?php echo $mverr;?></span>	
 		<br>
 
