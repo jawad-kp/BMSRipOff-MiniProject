@@ -1,0 +1,13 @@
+.container{
+	margin-top: 200px;
+}
+body{
+	background: linear-gradient(90deg, rgba(207,0,0,1) 0%, rgba(0,0,0,1) 85%);
+	width: 100%;
+	
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
