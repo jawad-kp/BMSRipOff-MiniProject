@@ -4,7 +4,25 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Select Movie's Time</title>
+	<title>Select Your Time Slot</title>
+	<script src="jquery/dist/jquery.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('button').click(function()
+			{
+				var MvTime = $(this).attr('value');
+				$.ajax(
+				{
+					type: "POST",
+					url:"SaveTimeData.php",
+					data:{Time: MvTime}
+				}).done(function()
+				{
+					window.location.replace("SeatMapGen.php");
+				})
+			})
+		})
+	</script>
 </head>
 <body>
 	<?php
