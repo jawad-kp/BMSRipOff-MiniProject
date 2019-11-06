@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2019 at 05:10 PM
+-- Generation Time: Nov 06, 2019 at 02:42 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -41,6 +41,7 @@ CREATE TABLE `admin_log` (
 --
 
 INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
+('ad', '$2y$10$rqfLxg18oq7R2Dqu7Tg8LObClMlxlqeEkr0Htkv2C7lqFtkhReaPi', 'admin'),
 ('AllenNo1', '$2y$10$9j/RKOFi19epwxDSDuOGO.Tkh6DlNRRdflSzlSh.HDqlOZCshg/IG', 'Allleeeeeen');
 
 -- --------------------------------------------------------
@@ -51,7 +52,8 @@ INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
 
 CREATE TABLE `bookings` (
   `uid` varchar(50) NOT NULL,
-  `Bid` varchar(50) NOT NULL
+  `Bid` varchar(50) NOT NULL,
+  `MvName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Saves the bookings for each user';
 
 -- --------------------------------------------------------
@@ -97,9 +99,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES
-('cse123', '$2y$10$a1sEsVMy.bFcmFyZnee1ROpwObcE3X2byS6xs76IjMTYE0tl7DkMa', 'sjbit'),
-('gg69', '$2y$10$RvWQmEaxGuWsw/9aq6V6suYM78Qa6xtu2VRBCeaVGbExIBjjaKgra', 'Gaurav'),
-('mub123', '$2y$10$k8NVGArkQxyIU3UacTFplumzy9Z7c9H3i8BTb8a9zHMU9Nyl/GE/m', 'md mubeen');
+('a', '$2y$10$TNHx2r6mKSgVCtT/99khHOk89MTWh939xq9evMLqNxC.72GoK2.ue', 'a');
 
 -- --------------------------------------------------------
 
@@ -112,6 +112,15 @@ CREATE TABLE `moviet` (
   `Screen` varchar(3) NOT NULL,
   `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Holds Screens and time a movie is running at';
+
+--
+-- Dumping data for table `moviet`
+--
+
+INSERT INTO `moviet` (`Name`, `Screen`, `Time`) VALUES
+('Funeral Time', 's1', '09:00:00'),
+('Funeral Time', 's2', '09:00:00'),
+('Your Mom is Existential', 's1', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -196,7 +205,8 @@ ALTER TABLE `admin_log`
 --
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`Bid`),
-  ADD KEY `UidLinkToLogin` (`uid`);
+  ADD KEY `UidLinkToLogin` (`uid`),
+  ADD KEY `MovieNameLinkToDetails` (`MvName`);
 
 --
 -- Indexes for table `deets`
@@ -259,6 +269,7 @@ ALTER TABLE `screens`
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
+  ADD CONSTRAINT `MovieNameLinkToDetails` FOREIGN KEY (`MvName`) REFERENCES `deets` (`Name`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `UidLinkToLogin` FOREIGN KEY (`uid`) REFERENCES `login` (`uid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
