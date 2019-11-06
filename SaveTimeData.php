@@ -7,6 +7,11 @@
 		echo $_SESSION["MovieTime"];
 
 	}
-	//echo "This aint it chief";
+	if(isset($_POST["Scr"]) && !empty($_POST["Scr"]))
+	{
+		$_SESSION["ScrNm"] = $_POST["Scr"];
+		echo $_SESSION["ScrNm"];
 
+	}
+	
   ?>

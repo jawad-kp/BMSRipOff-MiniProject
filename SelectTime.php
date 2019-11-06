@@ -11,11 +11,12 @@ session_start();
 			$('button').click(function()
 			{
 				var MvTime = $(this).attr('value');
+				var Scrt = $(this).attr('abd');
 				$.ajax(
 				{
 					type: "POST",
 					url:"SaveTimeData.php",
-					data:{Time: MvTime}
+					data:{Time: MvTime, Scr: Scrt}
 				}).done(function()
 				{
 					window.location.replace("SeatMapGen.php");
@@ -45,14 +46,14 @@ session_start();
 	    die("Connection failed: " . $conn->connect_error);
 	}
 
-	$qu = "Select `Time` from `moviet` where `Name` Like \"". $_SESSION["Movie"]."\"";
+	$qu = "Select `Time`, `Screen` from `moviet` where `Name` Like \"". $_SESSION["Movie"]."\"";
 	//echo $qu;
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
 	{	
 		while($row = $res->fetch_assoc()) 
 		{
-			echo "<button value = \"".$row["Time"]."\">".$row["Time"]."</button><br>";
+			echo "<button value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br>";
 		}
 	 }
 	 else

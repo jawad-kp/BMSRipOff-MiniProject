@@ -125,6 +125,7 @@ $(document).ready(function(){
    				if ($valT) 
    				{
    					header("Location: http://localhost/DBMS/wutishappening.html");
+   					
    				}
    				else
    				{

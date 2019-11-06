@@ -25,7 +25,7 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	echo "Connected successfully <br>";
+	//echo "Connected successfully <br>";
 
 	$uiderr=$pswderr=$reperr=$nmerr="";
     $uid=$pswd=$RePass=$nm="aa";
@@ -83,7 +83,7 @@
 	    	}
 	    	
 	    }// Passwords don't match
-		echo "no problem in check and changeIP<br>";
+		//echo "no problem in check and changeIP<br>";
 	    send_data($boo,$uid,$nm,$pswd);//passing the globals because otherwise it's a pain in the ass
 	    
 	}//if for emptyData ends here
@@ -101,16 +101,16 @@
         }//this removes trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh but it sorta removes the special characters if the user adds any.
         function send_data($bleh,$usr,$name,$pass)
         { 
-        	echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
+        	//echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
 	    	if($bleh)
 	    	{
 		    	$qry = "INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES (?, ?, ?)";
-		    	echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
+		    	//echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
 		    	$prepStmt = $GLOBALS['conn']->prepare($qry);//This works simliar to the Java thingy where we create a prepared statement.
-		    	echo "Query is prepared <br>";
+		    	//echo "Query is prepared <br>";
 
 		    	//First we check if username already exists
-		    	$chkQu = "SELECT `Admin` FROM `admin_log` WHERE `Admin` LIKE ".$uid;
+		    	$chkQu = "SELECT `Admin` FROM `admin_log` WHERE `Admin` LIKE \"".$usr."\"";
 		    	$res = $GLOBALS['conn']->query($chkQu);
 		    	//echo "Exectued first Check<br>";
 		    	if (!($res->num_rows != 0))
@@ -118,7 +118,7 @@
 		    		//echo "Entered if after first fetch <br>";
 		    		$pass = password_hash($pass, PASSWORD_DEFAULT); //I encrypt the passwords here so they're not plain text but are hashes instead. This basically gives us additional security
 		    		$prepStmt->bind_param("sss",$usr,$pass,$name);
-		    		echo "Statement prepared lol <br>";
+		    		//echo "Statement prepared lol <br>";
 		    		$prepStmt->execute();
 		    		echo "Account Created Successfully";
 		    		// else
@@ -130,7 +130,7 @@
 			}
 
     	}//send_data
-	echo "hello";
+	//echo "hello";
     ?> 
 	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 	<!-- <form name="HenloFrens" method = "post" > -->
@@ -141,7 +141,7 @@
 
 		<label >Admin ID</label>
 		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">*  <?php echo $usrerr;?> </span>	
+		<span class="error">*  <?php echo $uiderr;?> </span>	
 		<br>
 
 		<label>Password</label>

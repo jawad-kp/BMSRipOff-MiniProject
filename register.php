@@ -141,7 +141,7 @@
 
 		<label >User ID</label>
 		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">*  <?php echo $usrerr;?> </span>	
+		<span class="error">*  <?php echo $uiderr;?> </span>	
 		<br>
 
 		<label>Password</label>

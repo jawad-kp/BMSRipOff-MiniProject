@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,8 +73,8 @@
 		    	// echo $someval."<br>";
 		    	if(password_verify($pswd, $dbPass))
 		    	{
-		    		$btmerr = "Correct Info. Hashed and verified";
-		    		//Save session info here when we build the next screens
+		    		$_SESSION["user"] = $uid;
+		    		header("Location: http://localhost:8080/DBMS/ViewMovie.php");
 		    	}
 
 		    	else

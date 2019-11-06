@@ -44,7 +44,7 @@ session_start();
 	    die("Connection failed: " . $conn->connect_error);
 	}
 
-	$qu = "Select DISTINCT `Name` from `deets`";
+	$qu = "Select DISTINCT `Name` from `MovieT`";
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
 	{	
