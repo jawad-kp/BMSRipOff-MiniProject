@@ -6,6 +6,8 @@ session_start();
 <html>
 <head>
 	<title>Select Your Seats</title>
+		<link rel="stylesheet" type="text/css" href="pretty-checkbox/dist/pretty-checkbox.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="MapOfDaSeat.css">> -->
 </head>
 	<body>
 	<?php 
@@ -81,15 +83,15 @@ session_start();
 				{ 
 					if($SeatMap[$i] == 0)
 					{
-						echo "<input type = 'checkbox' name = 'seat[]' value=".($i+1).">";
+						echo "<div class=\"pretty p-default p-curve p-fill p-bigger\"> <input type = 'checkbox' name = 'seat[]' value='".($i+1)."' ><div class=\"state p-success\"><label></label></div></div>";
 					}
 					if ($SeatMap[$i] == 1) 
 					{
-						echo "<input type = 'checkbox' name = 'seat[]' value=".($i+1)." disabled>";
+						echo "<div class=\"pretty p-default p-curve p-fill p-bigger\"><input type = 'checkbox' name = 'seat[]' value='".($i+1)."'disabled><div class=\"state p-success\"><label></label></div></div>";
 					}
 					if (($i+1) % 4 == 0 ) 
 					{
-						echo "<br>";
+						echo "<br><br>";
 					}
 
 				}
