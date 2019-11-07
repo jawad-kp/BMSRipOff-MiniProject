@@ -30,12 +30,10 @@ session_start();
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
-			$qry = "Insert into `".$_SESSION["ScrNm"]."` (`Sno`, `bid`, `Time`) VALUES ('?', '?', '?')";
-			$stmt = $conn->prepare($qry);
+			// $qry = "Insert into `".$_SESSION["ScrNm"]."` (`Sno`, `bid`, `Time`) VALUES ('?', '?', '?')";
+			// $stmt = $conn->prepare($qry);
 			if(!empty($_POST["seat"]))
 			{
-				// echo gettype($_POST["seat"]);
-				//echo $_POST["seat"];
 				
 				if(is_array($_POST["seat"])||is_object($_POST["seat"]))
 				{
@@ -50,10 +48,13 @@ session_start();
 						{
 							$val = (int)$value;
 							//echo gettype($_SESSION["MovieTime"]);
+							$qry = "Insert into `".$_SESSION["ScrNm"]."` (`Sno`, `bid`, `Time`) VALUES (".$val.", '".$bid."', '".$_SESSION["MovieTime"]."')";
+							$conn->query($qry);
 
-							$stmt->bind_param("iss",$val,$bid,$_SESSION["MovieTime"]);
-							$stmt->execute();
 						}
+						$_SESSION["Seats"] = strval(count($_POST["seat"]));
+						$_SESSION["BkID"] = $bid;
+						header("Location: http://localhost:8080/DBMS/BookingConfirmed.php");
 					}
 				}
 				else

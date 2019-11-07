@@ -124,7 +124,7 @@ $(document).ready(function(){
 				echo $valT;
    				if ($valT) 
    				{
-   					header("Location: http://localhost/DBMS/wutishappening.html");
+   					header("Location: http://localhost:8080/DBMS/wutishappening.html");
    					
    				}
    				else

@@ -12,14 +12,14 @@
   		.error{ color: red; font-size: 16px }
   		.wrapper{ width:350px; padding: 20px }
   	</style>
-  <!--	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="l.css">
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
   		
-  	</script> -->
-  	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	</script> 
+  	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="l.css">
-  	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
   	<!-- Move the styling to an external CSS later on ALSO ADD SESSION FOR FUTURE SCREENS -->
 </head>
 
@@ -102,26 +102,28 @@
         <center>
         <h1 style="color: white">Sign in</h1></center><br>
         <div class="d-flex justify-content-center">
-        <div class="whi">
+	        <div class="whi">
 
-        <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
-	        
-				<input class="form-control" type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-				<!--<span class="error">*  <?php echo $uiderr;?> </span>-->	
-			<br><br>
+		        <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+			        
+						<input class="form-control" type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
+						<span class="error">*  <?php echo $uiderr;?> 
+					<br><br> 
 
-			
-	           <input class="form-control" type="password" placeholder="Enter Password"  name="pass"style="width: 300px; height: 30px; border-radius: 5px;">
-	           <!-- <span class="error">* <?php echo $pswderr;?> </span> -->	
-	         <br>
-	         <span class="error"> <?php echo $btmerr;?> </span>	
-	       <br>
-	        <center><button class="btn " style="color: red; font-size: 20px; border: 1.5px solid red; border-radius: 15%" type="submit">Sign in</button></center>
-	       <br>
-	       <a class="butt" href="http://localhost:8080/DBMS/register.php">Click Here to Sign up</a>
-	   </form></div>
- 		</div>
- 	</div>
+					
+			           <input class="form-control" type="password" placeholder="Enter Password"  name="pass"style="width: 300px; height: 30px; border-radius: 5px;">
+			            <span class="error">* <?php echo $pswderr;?> </span> 	
+			         <br>
+			         <span class="error"> <?php echo $btmerr;?> </span>	
+			       <br>
+			        <center><button class="btn " style="color: red; font-size: 20px; border: 1.5px solid red; border-radius: 15%" type="submit">Sign in</button></center>
+			       <br>
+			       <div class="btn" href= "http://localhost:8080/DBMS/register.php">Click here to sign up</div>
+			       <!-- <a class="butt" href="http://localhost:8080/DBMS/register.php">Click Here to Sign up</a> -->
+			   </form>
+
+	 		</div>
+	 	</div>
  <!-- php ends there hopefully -->
 </body>
 </html>
