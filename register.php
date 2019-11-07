@@ -9,6 +9,13 @@
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  	<link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  	<link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+	</script> 
+  	<link rel="stylesheet" type="text/css" href="regPage.css"> 
+
 </head>
 <body>
 	 <?php
@@ -25,7 +32,7 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	echo "Connected successfully <br>";
+	//echo "Connected successfully <br>";
 
 	$uiderr=$pswderr=$reperr=$nmerr="";
     $uid=$pswd=$RePass=$nm="aa";
@@ -83,7 +90,7 @@
 	    	}
 	    	
 	    }// Passwords don't match
-		echo "no problem in check and changeIP<br>";
+		//echo "no problem in check and changeIP<br>";
 	    send_data($boo,$uid,$nm,$pswd);//passing the globals because otherwise it's a pain in the ass
 	    
 	}//if for emptyData ends here
@@ -101,7 +108,7 @@
         }//this removes trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh but it sorta removes the special characters if the user adds any.
         function send_data($bleh,$usr,$name,$pass)
         { 
-        	echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
+        	//echo "Entered send_data with value: ".$bleh."<br>"."User ID ".$usr."<br>"."Name: ".$name."<br>"."Pass: ".$pass."<br>";
 	    	if($bleh)
 	    	{
 		    	$qry = "INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES (?, ?, ?)";
@@ -130,26 +137,26 @@
 			}
 
     	}//send_data
-	echo "hello";
+	//echo "hello";
     ?> 
 	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 	<!-- <form name="HenloFrens" method = "post" > -->
-		<label >Nayme </label>
+		<label class = "lab">Name </label>
 		<input type="text" name="nm" placeholder="Your name..." size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">* <?php echo $nmerr;?></span>	
 		<br>
 
-		<label >User ID</label>
+		<label class = "lab">User ID</label>
 		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">*  <?php echo $uiderr;?> </span>	
 		<br>
 
-		<label>Password</label>
+		<label class = "lab">Password</label>
            <input type="password" placeholder="Enter Password" name="pass">
            <span class="error">* <?php echo $pswderr;?> </span>	
          <br>	
 
-         <label>Re-Type Password</label>
+         <label class = "lab">Re-Type Password</label>
            <input type="password" placeholder="Enter Password" name="RePass">
            <span class="error">* <?php echo $reperr;?> </span>	
          <br>
@@ -159,7 +166,5 @@
 	</form>
 
 </body>
-<?php
-echo "<br>end of the line"
-?>
+
 </html>

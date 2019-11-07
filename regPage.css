@@ -1,0 +1,13 @@
+.lab{
+	color: white;
+}
+body
+{
+	background-image: url(RegBg.jpg);
+	background-size: cover;
+	background-position: all;
+	background-repeat: no-repeat;
+	/*height: 100%;
+	padding: 0;
+	margin: 0;*/
+}

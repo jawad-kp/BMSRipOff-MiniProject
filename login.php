@@ -16,10 +16,10 @@
   <link rel="stylesheet" type="text/css" href="l.css">
   <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
   <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
-  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-  		
-  	</script> 
+
+  	
   	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="l.css">
   	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->

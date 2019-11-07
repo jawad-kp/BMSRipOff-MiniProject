@@ -4,7 +4,7 @@
 	width: 250px;
 }*/
 body{
-	background-image: url("bgLogin.png");
+	background-image: url(bgLogin.png);
 	width: 100%;
 	
 	background-size: cover;
