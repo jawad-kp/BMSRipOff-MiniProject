@@ -27,6 +27,7 @@ session_start();
 	
 </head>
 <body>
+	<h1>Now Showing: </h1>
 
 	<!-- <form method="POST" action="SaveNameData.php"> -->
 		<form name = "whatevs">
@@ -57,6 +58,21 @@ session_start();
 
   </form>
 
+  <br>
+  <br>
+  <?php 
+  $que = "SELECT `Name` FROM `deets` WHERE `Name` NOT IN (Select DISTINCT `Name` from `MovieT`)";
+  $CminUpRes = $conn->query($que);
+  if ($CminUpRes->num_rows > 0) 
+  {
+  	echo "<h2>Coming Up...</h2>";
+  	while ($row = $CminUpRes->fetch_assoc())
+  	 {
+  		
+  		echo $row["Name"]."<br>";
+  	}
+  }
+ ?>
 
 </body>
 </html>
