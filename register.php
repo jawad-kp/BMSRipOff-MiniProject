@@ -7,7 +7,7 @@
   	<meta charset="utf-8">
   	<meta name="viewport" content="width= device-width, initial-scale=1">
   	<style type="text/css">
-  		.error{ color: red; font-size: 16px }
+  		.error{ color: white; font-size: 16px }
   	</style>
   	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   	<link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
@@ -112,12 +112,12 @@
 	    	if($bleh)
 	    	{
 		    	$qry = "INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES (?, ?, ?)";
-		    	echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
+		    	//echo "First Stirng Created <br>".$usr."<br> This should come after uid <br>";
 		    	$prepStmt = $GLOBALS['conn']->prepare($qry);//This works simliar to the Java thingy where we create a prepared statement.
-		    	echo "Query is prepared <br>";
+		    	//echo "Query is prepared <br>";
 
 		    	//First we check if username already exists
-		    	$chkQu = "SELECT `uid` FROM `login` WHERE `uid` LIKE ".$uid;
+		    	$chkQu = "SELECT `uid` FROM `login` WHERE `uid` LIKE \"".$usr."\"";
 		    	$res = $GLOBALS['conn']->query($chkQu);
 		    	//echo "Exectued first Check<br>";
 		    	if (!($res->num_rows != 0))
@@ -128,43 +128,81 @@
 		    		echo "Statement prepared lol <br>";
 		    		$prepStmt->execute();
 		    		echo "Account Created Successfully";
+		    		header("Location: http://localhost:8080/DBMS/login.php");
 		    		// else
 		    		// 	echo "Account not Created";
 		    	}//User id is not in use
 		    	else
+		    	{
 		    		$uiderr = "User ID is in use";
+		    	}
 		    	$GLOBALS['conn']->close();
 			}
 
     	}//send_data
 	//echo "hello";
     ?> 
-	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
-	<!-- <form name="HenloFrens" method = "post" > -->
-		<label class = "lab">Name </label>
-		<input type="text" name="nm" placeholder="Your name..." size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">* <?php echo $nmerr;?></span>	
-		<br>
+    <div class="container-fluid">
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Register</h1></center><br><br><br>
+    <div class="d-flex justify-content-center">
 
-		<label class = "lab">User ID</label>
-		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">*  <?php echo $uiderr;?> </span>	
-		<br>
+    	<div class="pos">
+	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 
-		<label class = "lab">Password</label>
-           <input type="password" placeholder="Enter Password" name="pass">
-           <span class="error">* <?php echo $pswderr;?> </span>	
-         <br>	
+	 	<div class="row form-group">
+	 		<div class="col-sm-4">
+				<label class = "lab">Name </label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" name="nm" placeholder="Your name..." class="form-control" size="70">
+				<span class="error">* <?php echo $nmerr;?></span>
+			</div>	
+		</div>
 
-         <label class = "lab">Re-Type Password</label>
-           <input type="password" placeholder="Enter Password" name="RePass">
-           <span class="error">* <?php echo $reperr;?> </span>	
-         <br>
+		<div class="row form-group">
+			<div class="col-sm-4">
 
-         <button type="submit">Submit</button>	
+				<label class = "lab">User ID</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" name="uid" placeholder="User ID" class="form-control">
+				<span class="error">*  <?php echo $uiderr;?> </span>
+			</div>	
+		</div>
+
+		<div class="row form-group">
+			<div class="col-sm-4">
+				<label class = "lab">Password</label>
+			</div>
+			<div class="col-sm-6">
+		           <input type="password" placeholder="Enter Password" name="pass" class="form-control">
+		           <span class="error">* <?php echo $pswderr;?> </span>	
+		    </div>
+		</div>	
+
+
+		<div class="row form-group">
+			<div class="col-sm-4">
+		         <label class = "lab">Re-enter Password</label>
+            </div>
+            <div class="col-sm-6">
+		           <input type="password" placeholder="Enter Password" name="RePass" class="form-control">
+
+		           <span class="error">* <?php echo $reperr;?> </span>
+
+		    </div>	
+        </div>
+        <div class="row">
+        	<div class="col-sm"></div>
+        	<div class="col-sm">
+	        	<button type="submit" class="btn btn-primary hvr-radial-out " style="font-size: 25px; background-color: black; color: white">Submit</button>	
+     		</div>
+        	<div class="col-sm"></div>
+
+     	</div>
+
 
 	</form>
-
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 .lab{
 	color: white;
+	font-size: 25px;
 }
 body
 {
@@ -11,3 +12,15 @@ body
 	padding: 0;
 	margin: 0;*/
 }
+/*.pos{
+	
+	width: auto;
+	height: auto;
+
+	text-align: center;
+	float: left;
+	margin: 0 auto;
+	display: block;
+
+	padding: 20px;
+}*/
