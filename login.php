@@ -9,12 +9,15 @@
 	<meta charset="utf-8">
   	<meta name="viewport" content="width= device-width, initial-scale=1">
   	<style type="text/css">
-  		.error{ color: red; font-size: 16px }
+  		.error{ color: white; font-size: 16px; align-content: left; }
   		.wrapper{ width:350px; padding: 20px }
   	</style>
-  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="l.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+
   		
   	</script> 
   	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -43,7 +46,7 @@
 	{
 	    if(empty($_POST["uid"]))
 	    {
-	        $uiderr="Please enter a valid User ID";
+	        $uiderr="* Please enter a valid User ID";
 	        $boo = false;
 	    }
 	    else
@@ -52,7 +55,7 @@
 	    }//UID
 	    if(empty($_POST["pass"]))
 	    {
-	        $pswderr="Please enter a Password";
+	        $pswderr="* Please enter a Password";
 	        $boo = false;
 	    }
 	    else
@@ -85,7 +88,7 @@
 		    }
 		    else
 		    {
-		    	$btmerr = "User or pass is incorrect. Outer else triggered";
+		    	$btmerr = "User or pass is incorrect.";
 		    	$boo = false;
 		    }
 	    }
@@ -100,25 +103,30 @@
         ?>
         <div class="container">
         <center>
-        <h1 style="color: white">Sign in</h1></center><br>
+        <h1 style="color: white" class="fadeInDownBig animated">Sign in</h1></center><br>
         <div class="d-flex justify-content-center">
 	        <div class="whi">
 
 		        <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+		        	<div class="row"></div>
 			        
-						<input class="form-control" type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-						<span class="error">*  <?php echo $uiderr;?> 
-					<br><br> 
-
-					
-			           <input class="form-control" type="password" placeholder="Enter Password"  name="pass"style="width: 300px; height: 30px; border-radius: 5px;">
-			            <span class="error">* <?php echo $pswderr;?> </span> 	
-			         <br>
-			         <span class="error"> <?php echo $btmerr;?> </span>	
+			        	<div class="form-group">
+			        		<!-- <label>User ID</label> -->
+						<input class="form-control" type="text" name="uid" placeholder="User ID" size="50">
+						
+						<div class="error"> <?php echo $uiderr;?> </div>
+						</div>
+						<br>
+						<div class="form-group">
+							<!-- <label>Password: </label> -->
+			           <input class="form-control" type="password" placeholder="Enter Password"  name="pass">
+			            <div class="error"> <?php echo $pswderr;?> </div> 	
+			         </div>
+			         <div class="error"> <?php echo $btmerr;?> </div>	
 			       <br>
-			        <center><button class="btn " style="color: red; font-size: 20px; border: 1.5px solid red; border-radius: 15%" type="submit">Sign in</button></center>
+			        <center><button class="btn btn-primary hvr-grow" type="submit">Sign in</button></center>
 			       <br>
-			       <div class="btn" href= "http://localhost:8080/DBMS/register.php">Click here to sign up</div>
+			       <a href="http://localhost:8080/DBMS/register.php" class="btn btn-info hvr-float">Click here to sign up</div></a>
 			       <!-- <a class="butt" href="http://localhost:8080/DBMS/register.php">Click Here to Sign up</a> -->
 			   </form>
 
