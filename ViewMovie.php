@@ -7,6 +7,18 @@ session_start();
 <head>
 	<title>View Currently Showing Movies</title>
 	<script src="jquery/dist/jquery.js"></script>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width= device-width, initial-scale=1">
+  	<style type="text/css">
+  		.error{ color: white; font-size: 16px; align-content: left; }
+  		.wrapper{ width:350px; padding: 20px }
+  	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="view.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 	<script>
 		$(document).ready(function(){
 			$('button').click(function()
@@ -36,15 +48,12 @@ session_start();
 	$username = "root";
 	$db = "bmsripoff";
 	$password = "";
-
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
-
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-
 	$qu = "Select DISTINCT `Name` from `MovieT`";
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
