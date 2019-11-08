@@ -6,7 +6,7 @@ session_start();
 <html>
 <head>
 	<title>Select Your Seats</title>
-		<link rel="stylesheet" type="text/css" href="pretty-checkbox/dist/pretty-checkbox.min.css">
+		<link rel="stylesheet" type="text/css" href="pretty-checkbox/dist/pretty-checkbox.css">
 		<!-- <link rel="stylesheet" type="text/css" href="MapOfDaSeat.css">> -->
 </head>
 	<body>
@@ -39,9 +39,9 @@ session_start();
 				
 				if(is_array($_POST["seat"])||is_object($_POST["seat"]))
 				{
-					$bid = $_SESSION["user"]."Sno".strval(count($_POST["seat"]));
+					$bid = $_SESSION["user"]."SeatS".strval(count($_POST["seat"])).$_SESSION["Movie"].strval(mt_rand(0,10000));
 					// $bid = $_SESSION["user"]."Sno".count($_POST["seat"]);
-					$bkQry = "INSERT INTO `bookings` (`uid`, `Bid`, `MvName`) VALUES ('".$_SESSION["user"]."', '".$bid."', '".$_SESSION["Movie"]."')";
+					$bkQry = "INSERT INTO `bookings` (`uid`, `Bid`, `MvName`,`Screen`) VALUES ('".$_SESSION["user"]."', '".$bid."', '".$_SESSION["Movie"]."','".$_SESSION["ScrNm"]."')";
 					if($conn->query($bkQry))
 					{
 						$conn->commit();
