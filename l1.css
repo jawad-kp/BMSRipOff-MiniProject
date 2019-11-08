@@ -6,7 +6,8 @@
 body{
 	background-image: url(adminbg1.jpg);
 	width: 100%;
-	
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	height: 100%;
