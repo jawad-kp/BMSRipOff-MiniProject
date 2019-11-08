@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2019 at 02:42 PM
+-- Generation Time: Nov 08, 2019 at 02:24 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -53,8 +53,16 @@ INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
 CREATE TABLE `bookings` (
   `uid` varchar(50) NOT NULL,
   `Bid` varchar(50) NOT NULL,
-  `MvName` varchar(50) NOT NULL
+  `MvName` varchar(50) NOT NULL,
+  `Screen` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Saves the bookings for each user';
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`uid`, `Bid`, `MvName`, `Screen`) VALUES
+('a', 'aSeatS4Your Mom is Existential6394', 'Your Mom is Existential', 's1');
 
 -- --------------------------------------------------------
 
@@ -99,7 +107,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES
-('a', '$2y$10$TNHx2r6mKSgVCtT/99khHOk89MTWh939xq9evMLqNxC.72GoK2.ue', 'a');
+('a', '$2y$10$TNHx2r6mKSgVCtT/99khHOk89MTWh939xq9evMLqNxC.72GoK2.ue', 'a'),
+('b', '$2y$10$fjNHG1p1lMtLP1Xum1HLZ.xJ5uRcm1eScqzFn16wj4ZWjo5.JLY62', 'b'),
+('c', '$2y$10$pEXWoTPEIkbraN9y1Hz1J.MPnUwNQIi3576kALUQZMWOfKroBs.g6', 'c');
 
 -- --------------------------------------------------------
 
@@ -133,6 +143,16 @@ CREATE TABLE `s1` (
   `bid` varchar(50) NOT NULL,
   `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Booked seats for a given show';
+
+--
+-- Dumping data for table `s1`
+--
+
+INSERT INTO `s1` (`Sno`, `bid`, `Time`) VALUES
+(1, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
+(2, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
+(3, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
+(4, 'aSeatS4Your Mom is Existential6394', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -206,7 +226,8 @@ ALTER TABLE `admin_log`
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`Bid`),
   ADD KEY `UidLinkToLogin` (`uid`),
-  ADD KEY `MovieNameLinkToDetails` (`MvName`);
+  ADD KEY `MovieNameLinkToDetails` (`MvName`),
+  ADD KEY `ScreenToScreens` (`Screen`);
 
 --
 -- Indexes for table `deets`
@@ -270,6 +291,7 @@ ALTER TABLE `screens`
 --
 ALTER TABLE `bookings`
   ADD CONSTRAINT `MovieNameLinkToDetails` FOREIGN KEY (`MvName`) REFERENCES `deets` (`Name`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ScreenToScreens` FOREIGN KEY (`Screen`) REFERENCES `screens` (`SName`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `UidLinkToLogin` FOREIGN KEY (`uid`) REFERENCES `login` (`uid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
