@@ -672,10 +672,15 @@
 .pretty input[disabled] {
   cursor: not-allowed;
   display: none;
+  background-color: #aaa9ad;
+  background-repeat: repeat;
+  border-radius: 2px;
 }
 
 .pretty input[disabled] ~ * {
   opacity: .5;
+  background-color: #aaa9ad;
+  border-radius: 2px;
 }
 
 .pretty.p-locked input {
