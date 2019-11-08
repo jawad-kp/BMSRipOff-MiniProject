@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (!(isset($_SESSION["adm"]))) {
+	die("You are Illegally Accessing this page:");
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

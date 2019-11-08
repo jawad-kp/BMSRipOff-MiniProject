@@ -39,14 +39,14 @@ session_start();
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
-	    if(empty($_POST["uid"]))
+	    if(empty($_POST["adminid"]))
 	    {
 	        $uiderr="Please enter a valid User ID";
 	        $boo = false;
 	    }
 	    else
 	    {
-	    	$uid=chngIP($_POST["uid"]);
+	    	$uid=chngIP($_POST["adminid"]);
 	    }//UID
 
 	    if(empty($_POST["pass"]))
@@ -70,16 +70,16 @@ session_start();
 		    	$dbPass = $row["pass"];
 		    	echo $dbPass."<br>";
 		    	//echo password_hash($pswd, PASSWORD_BCRYPT)."<br>";
-		    	// $someval = password_verify($pswd, $dbPass);
+		    	//$someval = password_verify($pswd, $dbPass);
 		    	// echo $someval."<br>";
 		    	if(password_verify($pswd, $dbPass))
 		    	{
 		    		$_SESSION["adm"] = $uid;
-		    		header("Location: http://localhost:8080/DBMS/AdminDashBoard.php");
+		    		header("Location: http://localhost:8080/DBMS/AddMovie.php");
 		    	}
 
 		    	else
-		    	{
+		    	{//adminid
 		    		$btmerr = "Incorrect User or Pass. Access Declined";
 		    		$boo =false;
 		    	}
