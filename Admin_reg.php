@@ -9,6 +9,11 @@
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="regPage.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	 <?php
@@ -131,33 +136,55 @@
 
     	}//send_data
 	//echo "hello";
-    ?> 
+    ?>
+    <div class="container-fluid">
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Admin Register</h1></center><br><br><br>
+    <div class="d-flex justify-content-center">
+
+    	<div class="pos">
 	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 	<!-- <form name="HenloFrens" method = "post" > -->
-		<label >Name </label>
+		<div class="row form-group">
+	 		<div class="col-sm-4">
+				<label class = "lab" style="color: black">Name </label>
+			</div>
+			</div>
+			<div class="row form-group">
+			<div class="col-sm-6">
 		<input type="text" name="nm" placeholder="Your name..." size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">* <?php echo $nmerr;?></span>	
-		<br>
+		</div></div>
+
+		<div class="row form-group">
+			<div class="col-sm-4">
 
 		<label >Admin ID</label>
 		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
 		<span class="error">*  <?php echo $uiderr;?> </span>	
-		<br>
+		</div></div>
 
+		<div class="row form-group">
+			<div class="col-sm-4">
 		<label>Password</label>
            <input type="password" placeholder="Enter Password" name="pass">
            <span class="error">* <?php echo $pswderr;?> </span>	
-         <br>	
-
+         </div>	
+         <div class="col-sm-6">
          <label>Re-Type Password</label>
            <input type="password" placeholder="Enter Password" name="RePass">
            <span class="error">* <?php echo $reperr;?> </span>	
-         <br>
+         </div></div>
 
-         <button type="submit">Submit</button>	
+         <div class="row">
+        	<div class="col-sm"></div>
+        	<div class="col-sm">
+	        	<button type="submit" class="btn btn-primary hvr-radial-out " style="font-size: 25px; background-color: black; color: white">Submit</button>	
+     		</div>
+        	<div class="col-sm"></div>
+		</div>	
 
 	</form>
-
+</div></div>
 </body>
 <?php
 echo "<br>end of the line"

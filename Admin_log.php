@@ -11,6 +11,11 @@ session_start();
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="l1.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   	<!-- Move the styling to an external CSS later on ALSO ADD SESSION FOR FUTURE SCREENS -->
 </head>
 
@@ -97,22 +102,32 @@ session_start();
 
         }//Refer Register.php for documentation same modify input and delete any space stuff
         ?>
-
+        <div class="container">
+        <center>
+        <h1 style="color: white" class="fadeInDownBig animated">Admin Login</h1></center><br>
+        <div class="d-flex justify-content-center">
+        	<div class="whi">
         <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
-	        <label >Admin ID</label>
-				<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-				<span class="error">*  <?php echo $uiderr;?> </span>	
-			<br>
-
-			<label>Password</label>
-	           <input type="password" placeholder="Enter Password" name="pass">
-	           <span class="error">* <?php echo $pswderr;?> </span>	
-	         <br>
-	         <span class="error"> <?php echo $btmerr;?> </span>	
-	       <button type="submit">Submit</button> 
-	       <br>
+	        <div class="row"></div>
+			        
+			        	<div class="form-group">
+			        		<!-- <label>User ID</label> -->
+						<input class="form-control" type="text" name="adminid" placeholder="Admin ID" size="50">
+						
+						<div class="error"> <?php echo $uiderr;?> </div>
+						</div>
+						<br>
+						<div class="form-group">
+							<!-- <label>Password: </label> -->
+			           <input class="form-control" type="password" placeholder="Enter Password"  name="pass">
+			            <div class="error"> <?php echo $pswderr;?> </div> 	
+			         </div>
+			         <div class="error"> <?php echo $btmerr;?> </div>	
+			       <br>
+			        <center><button class="btn btn-primary hvr-grow" type="submit">Sign in</button></center>
+			       <br>
 	   </form>
- 
+ </div></div></div>
  <!-- php ends there hopefully -->
 </body>
 </html>

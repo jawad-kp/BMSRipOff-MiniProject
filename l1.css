@@ -1,0 +1,43 @@
+/*.container{
+	margin-top: 200px;
+	height: 300px;
+	width: 250px;
+}*/
+body{
+	background-image: url(adminbg1.jpg);
+	width: 100%;
+	
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+.whi{
+	
+	background-color: white;
+	text-decoration-color: grey;
+	width: auto;
+	height: auto;
+	/*align-content: center;*/
+	text-align: center;
+	float: left;
+	margin: 0 auto;
+	display: block;
+	/*border-radius: 5px;*/
+	/*padding-top: 30px;
+	padding-bottom: 30px;*/
+	padding: 20px;
+}
+/*.butn{
+         background-color: white;
+         border: none;
+         color: white;
+         padding: 20px 34px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 20px;
+         margin: 4px 2px;
+         cursor: pointer;
+}*/
