@@ -113,9 +113,9 @@ if (!(isset($_SESSION["adm"]))) {
     ?> 
     <ul>
   <li><a class="active" href="">ADD MOVIE</a></li>
-  <li><a href="default.asp">ADD SHOW</a></li>
-  <li><a href="news.asp">DELETE MOVIE</a></li>
-  <li><a href="contact.asp">DELETE SHOW</a></li>
+  <li><a href="addshow.php">ADD SHOW</a></li>
+  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
+  <li><a href="deleteshow.php">DELETE SHOW</a></li>
 
 </ul>
 
