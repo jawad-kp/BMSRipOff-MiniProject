@@ -14,12 +14,10 @@ if (!(isset($_SESSION["user"]))) {
   	<meta name="viewport" content="width= device-width, initial-scale=1">
   	<style type="text/css">
   		.error{ color: white; font-size: 16px; align-content: left; }
-  		.wrapper{ width:350px; padding: 20px }
   	</style>
   	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="view.css">
+  <link rel="stylesheet" type="text/css" href="viewMov.css">
   <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
-  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 	<script>
@@ -42,8 +40,30 @@ if (!(isset($_SESSION["user"]))) {
 	
 </head>
 <body>
+	<div class="container-fluid">
 
-	<h1>Now Showing: </h1>
+
+		<nav style="width: 100%;">
+			<center>
+			<ul >
+				<li>
+					<a  href="#"  class = "plzwrk">View Movies</a>
+				</li>
+				<li class="hvr-bob">
+					<a  href="ViewBookings.php">View Bookings</a>
+				</li>
+				<li class="hvr-bob">
+					<a href="Logout.php">Logout</a>
+				</li>
+			</ul>
+			</center>
+			
+		</nav>
+
+		<br><br>
+		<br>
+
+	<h1 class="colorMan">Now Showing: </h1>
 
 	<!-- <form method="POST" action="SaveNameData.php"> -->
 		<form name = "whatevs">
@@ -60,13 +80,40 @@ if (!(isset($_SESSION["user"]))) {
 	}
 
 
-	$qu = "Select DISTINCT `Name` from `MovieT`";
+	$qu = "SELECT DISTINCT `moviet`.`Name`, `Synop` FROM `moviet`,`deets` WHERE `moviet`.`Name` = `deets`.`Name`";;
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
 	{	
+			// echo "<div class = \"row\">";
+			// 	echo "<div class = \"col-sm-3\">";
+			// 		echo "<h4>";
+			// 			echo "Movie";
+			// 		echo "</h4>";
+
+			// 	echo "</div>";
+			// 	echo "<div class = \"col-sm\">";
+			// 		echo "<h4>";
+			// 			echo "Synopsis";
+			// 		echo "</h4>";
+			// 	echo "</div>";
+			// echo "</div>";
 		while($row = $res->fetch_assoc()) 
 		{
-			echo "<button value = \"".$row["Name"]."\">".$row["Name"]."</button><br>";
+			$syn = substr($row["Synop"],0,150)."...";
+			echo "<div class = \"row\">";
+				echo "<div class = \"col-sm-2\">";
+				echo "</div>";
+				echo "<div class = \"col-sm\">";
+					echo "<button value = \"".$row["Name"]."\" class = \"bttneTyme hvr-grow\">".$row["Name"];
+					echo ":<br>".$syn."<br>";
+				echo "</div>";
+				echo "</button>";
+				echo "<div class = \"col-sm-2\">";
+				echo "</div>";
+			echo "</div>";
+			echo "<br>";
+			echo "<br>";
+			// echo "</div>";
 		}
 	 } 
   ?>
@@ -80,20 +127,27 @@ if (!(isset($_SESSION["user"]))) {
   $CminUpRes = $conn->query($que);
   if ($CminUpRes->num_rows > 0) 
   {
-  	echo "<h2>Coming Up...</h2>";
+  	echo "<h1 class = \"colorMan\">Coming Up...</h1>";
   	while ($row = $CminUpRes->fetch_assoc())
   	 {
-  		
-  		echo $row["Name"]."<br>";
+  		echo "<div class = \"row\">";
+	  		echo "<div class = \"col-sm-1\">";
+			echo "</div>";
+			echo "<div class = \"colorMan lab col-sm\">".$row["Name"]."<br></div>";
+			echo "<div class = \"col-sm-1\">";
+			echo "</div>";
+		echo "</div>";
   	}
   }
  ?>
- <br>
+ <!-- <br>
  <br>
  <a href="http://localhost:8080/DBMS/ViewBookings.php" style="text-decoration: none; color: red; border-color: black;" > Click Here To View Your Existing Bookings</a>
  <br>
  <br>
- <a href="Logout.php">Logout</a>
+ <a href="Logout.php">Logout</a> -->
+
+ </div>
 
 </body>
 </html>

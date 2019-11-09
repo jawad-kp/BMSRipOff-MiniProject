@@ -1,0 +1,99 @@
+.bttneTyme
+{
+  			background-color: white;
+  			border: 1px solid black;
+  			border-radius: 8px;
+  			/*border-color: black;*/
+  			cursor: pointer;
+  			display: block;
+ }
+ .lab{
+	color: white;
+	font-size: 25px;
+}
+body
+{
+	background-image: url(bglogin.png);
+	background-size: cover;
+	background-position: all;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	/*height: 100%;
+	padding: 0;
+	margin: 0;*/
+}
+.colorMan{
+	color: white;
+}
+
+nav ul
+   { 
+  	list-style: none;
+  	text-align: center;
+  	padding: 0;
+  	margin: 0,10px;
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	background-color: rgb(10,10,10);
+  	opacity:1 ;
+
+  	}
+  li a {
+    display: inline-block; ;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    /*font-family: Roboto;*/
+  }
+
+  nav a{text-decoration:none;}
+    nav li{display: inline-block;}
+
+  nav a:hover{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    margin-bottom: -30px;
+    text-decoration: none;
+  }
+
+  .plzwrk
+  {color: black;
+   background-color: white;
+    cursor: default;
+	}
+	.plzwrk:hover
+	{
+		color: black;
+   		background-color: white;
+    	cursor: default;
+    	border-radius: 0px;
+
+	}
+
+	.fntclr{
+		color: white;
+	}
+
+	.badaFont{
+		font-size: 30px;
+		background-color: white;
+		color: black;
+	}
+  /*nav li .acti{
+  	background-color: white;
+    color: black;
+    border-radius: 5px;
+    margin-bottom: -30px;
+    text-decoration: none;
+
+  }*/
+
+/*.biggerFont
+{
+	font-size: 72px;
+}*/

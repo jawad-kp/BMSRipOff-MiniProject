@@ -15,11 +15,33 @@ if (!(isset($_SESSION["user"])))
   	<meta name="viewport" content="width= device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   	<link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
-  	<link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+	<link rel="stylesheet" type="text/css" href="viewMov.css">
+
+  	<!-- <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css"> -->
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
+
+		<nav style="width: 100%;">
+			<center>
+			<ul >
+				<li class="hvr-bob">
+					<a  href="ViewMovie.php"  class = "hvr-bob">View Movies</a>
+				</li>
+				<li >
+					<a  href="ViewBookings.php" class="plzwrk">View Bookings</a>
+				</li>
+				<li class="hvr-bob">
+					<a href="Logout.php">Logout</a>
+				</li>
+			</ul>
+			</center>
+			
+		</nav>
+
+		<br><br>
+		<br>
 	<?php
 		$servername = "127.0.0.1";
 		$username = "root";
@@ -41,15 +63,17 @@ if (!(isset($_SESSION["user"])))
 			die("Invalid Login");
 		 }
 
+		 echo "<div class = \"fntclr\">";
 		 echo "<h1>Welcome ".$_SESSION["username"]."!!!</h1>";
 		 $qry = "SELECT * FROM `bookings` WHERE `uid` LIKE \"".$_SESSION["user"]."\"";
 
 		 $res = $conn->query($qry);
 		 if ($res->num_rows>0)
 		  {
-		  	echo "<div class = \"row\">";
-		  	echo "<div class=\"col-sm-3\">Booking ID </div><div class=\"col-sm-3\"> Movie Name </div><div class=\"col-sm-3\">Screen </div><div class=\"col-sm-3\"> Seats</div>";
+		  	echo "<br><div class = \"row badaFont \">";
+		  	echo "<div class=\"col-sm-3 \">Booking ID </div><div class=\"col-sm-3\"> Movie Name </div><div class=\"col-sm-3\">Screen </div><div class=\"col-sm-3\"> Seats</div>";
 		  	echo "</div>";
+		  	echo "<br>";
 
 
 		 	while ($row = $res->fetch_assoc()) 
@@ -67,7 +91,7 @@ if (!(isset($_SESSION["user"])))
 		 		 $SeatList = substr($listOfSeats,0,(strlen($listOfSeats)-2));
 		 		 echo $SeatList;
 		 		echo " </div>";//This closes the last column.
-		 		echo"</div>";//This closes the row.
+		 		echo"</div><br>";//This closes the row.
 
 		 	}
 		 }
@@ -77,15 +101,8 @@ if (!(isset($_SESSION["user"])))
 		 }
 
 	  ?>
-	  <br>
-	  <br>
-
-	  <a href="ViewMovie.php">Click Here View Now Showing Movies</a>
-	  <br>
-	  <br>
-	  <a href="Logout.php">Logout</a>
-
 	  </div>
+	</div>
 
 </body>
 </html>
