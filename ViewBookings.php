@@ -44,14 +44,14 @@ session_start();
 		 if ($res->num_rows>0)
 		  {
 		  	echo "<div class = \"row\">";
-		  	echo "<div class=\"col-xs-3\">Booking ID </div><div class=\"col-xs-3\"> Movie Name </div><div class=\"col-xs-3\">Screen </div><div class=\"col-xs-3\"> Seats</div>";
+		  	echo "<div class=\"col-sm-3\">Booking ID </div><div class=\"col-sm-3\"> Movie Name </div><div class=\"col-sm-3\">Screen </div><div class=\"col-sm-3\"> Seats</div>";
 		  	echo "</div>";
 
 
 		 	while ($row = $res->fetch_assoc()) 
 		 	{
 		 		echo "<div class = \"row\">";
-		 		echo "<div class=\"col-xs-3\">".$row["Bid"]." </div><div class=\"col-xs-3\">".$row["MvName"]." </div><div class=\"col-xs-3\">".$row["Screen"]." </div><div class = \"col-xs-3\">";
+		 		echo "<div class=\"col-sm-3\">".$row["Bid"]." </div><div class=\"col-sm-3\">".$row["MvName"]." </div><div class=\"col-sm-3\">".$row["Screen"]." </div><div class = \"col-sm-3\">";
 
 		 		$seatingQuery = "SELECT `Sno` FROM `".$row["Screen"]."` WHERE `bid` LIKE \"".$row["Bid"]."\"";
 		 		$seatRes = $conn->query($seatingQuery);
