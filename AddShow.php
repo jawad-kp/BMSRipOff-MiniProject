@@ -7,6 +7,11 @@
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="l2.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -95,9 +100,41 @@
         }
 
 		?>
+		<ul>
+  <li><a href="addmovie.php">ADD MOVIE</a></li>
+  <li><a class="active" href="">ADD SHOW</a></li>
+  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
+  <li><a href="deleteshow.php">DELETE SHOW</a></li>
+  <li><a href="admin_reg.php">REGISTER ADMIN</a></li>
+  <li><a href="logout.php">LOGOUT</a></li>
 
-		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
-			<label >Movie's Name :</label>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		 <div class="container-fluid">
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Add Show</h1></center><br><br><br>
+    <div class="d-flex justify-content-center">
+
+    	<div class="pos">
+		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 	<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label >Movie's Name :</label></div>
+			<div class="col-sm-6">
 				<select name="Mvnm">
 				<?php
 					$sql = "SELECT Name FROM `deets`";
@@ -110,9 +147,12 @@
 				  ?> 
 				</select>
 				<span class="error">*<?php echo $Mvnmerr;?> </span>	
-			<br>
+			</div></div>
 
-			<label >Screen :</label>
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label >Screen :</label></div>
+			<div class="col-sm-6">
 				<select name="Scnm">
 				<?php
 					$sql = "SELECT * FROM `screens`";
@@ -125,11 +165,17 @@
 				  ?> 
 				</select>
 				<span class="error">*<?php echo $Scnmerr;?> </span>
-			<br>
+			</div></div>
 
-			<label>Time:</label>
-				<br>
-				<label>Hour</label>
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label>Time:</label></div>
+			<div class="col-sm-6">
+				</div></div>
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+				<label>Hour</label></div>
+				<div class="col-sm-6">
 				<select name="hr">
 					<option value="9"selected>9</option> <!-- Default -->
 
@@ -140,8 +186,12 @@
 					}  
 				?>
 				</select>
-		
-				<label>Minute</label>
+				</div></div>
+
+				<div class="row form-group">
+	 		<div class="col-sm-4">		
+				<label>Minute</label></div>
+				<div class="col-sm-6">
 				<select name="min">
 					<option value="00"selected>00</option> <!-- Default -->
 					
@@ -154,18 +204,14 @@
 					}  
 				?>
 				</select>
-				<br>
+				</div></div>
 
-			<button type="submit">Submit</button>
+			<center><button class="btn btn-primary hvr-float" type="submit">Add</button></center>
+			       <br>
 			<span class="error">*<?php echo $Finerr;?> </span>
 
 		</form>
-		
+		</div></div></div>
 		<br>
-
-		
-
-	
-
 </body>
 </html>
