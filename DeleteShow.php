@@ -1,3 +1,14 @@
+<?php
+	session_start();
+	if ((!isset($_SESSION["adm"]))) 
+	{
+		die("Illegal Access");
+	}  
+
+  ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +17,6 @@
 	<!-- <script src="jquery-3.4.1.min.js"></script> -->
 
 	<script type="text/javascript">
-
 $(document).ready(function(){
 	var rk = "";
 	var disone5you ="no";
@@ -49,11 +59,6 @@ $(document).ready(function(){
     });
 });
 </script>
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="l2.css">
-  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
-  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
-  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<?php
@@ -75,7 +80,7 @@ $(document).ready(function(){
 
 	$boo = true;
 	$mverr=$scerr=$timerr="";//error variables
-	$btm="lol fresh";
+	//$btm="lol fresh";
 	$scr=$tim="";//data varaibles
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
@@ -130,8 +135,8 @@ $(document).ready(function(){
 				echo $valT;
    				if ($valT) 
    				{
-   					header("Location: http://localhost:8080/DBMS/wutishappening.html");
-   					
+   					$_SESSION["DeleteShowStat"] = "Record Successfully Deleted!!";
+   					header("Location: http://localhost:8080/DBMS/DeleteShow.php");
    				}
    				else
    				{
@@ -144,26 +149,9 @@ $(document).ready(function(){
         }
 
 	?>
-<ul>
-  <li><a href="addmovie.php">ADD MOVIE</a></li>
-  <li><a href="addshow.php">ADD SHOW</a></li>
-  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
-  <li><a class="active" href="">DELETE SHOW</a></li>
-  <li><a href="admin_reg.php">REGISTER ADMIN</a></li>
-  <li><a href="logout.php">LOGOUT</a></li>
 
-
-</ul>
-	<div class="container-fluid">
-    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Delete Movie</h1></center><br><br><br>
-    <div class="d-flex justify-content-center">
-
-    <div class="pos">
 	<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
-			<div class="row form-group">
-	 		<div class="col-sm-4">
-			<label >Movie's Name :</label></div>
-			<div class="col-sm-6">
+			<label >Movie's Name :</label>
 				<select name="Name" id="name">
 					<option value="">Select a Movie </option>
 				<?php
@@ -177,30 +165,35 @@ $(document).ready(function(){
 				  ?> 
 				</select>
 				<span class="error">* <?php echo $mverr;?></span>
-			</div></div>
-			<div class="row form-group">
-	 	<div class="col-sm-4">
-			<label >Screen :</label></div>
-				<div class="col-sm-6">
+			<br>
+			<label >Screen :</label>
 				<select name="Screen" id="screen">
 			        <option value="">Select Movie first</option>
 			    </select>
 			    <span class="error">* <?php echo $scerr;?></span>
-			</div></div>
-			<div class="row form-group">
-	 	<div class="col-sm-4">
-			<label >Time :</label> </div>
-			<div class="col-sm-6"> 
+			<br>
+			<label >Time :</label>  
 			    <select name="Time" id="time">
 			        <option value="">Select Time first</option>
 			    </select>
 			    <span class="error">* <?php echo $timerr;?></span>
-			    </div></div>
-			    <center><button class="btn btn-primary hvr-float" type="submit">Delete</button></center>
-			       <br>		
+			    <br>
+			    <button type="submit">Submit</button>	
 
-			    </form>	</div></div></div>	
-			    <?php echo $btm;?>
+			    </form>		
+			   <br>
+			   <br>
+			   <h3>
+			   <?php
+			   if (isset($_SESSION["DeleteShowStat"]))
+			    {
+			     	echo $_SESSION["DeleteShowStat"];
+			     	unset($_SESSION["DeleteShowStat"]);
+			     } 
+
+			      ?>
+
+			      </h3>
 
 
 	</body>

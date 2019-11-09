@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	if (!(isset($_SESSION["adm"]))) 
+		{
+			die("Illegal Access");
+		}  
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +17,6 @@
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
-  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="l2.css">
-  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
-  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
-  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -22,6 +27,9 @@
 		$password = "";
 
 		// Create connection
+
+		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 		$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
 
 		// Check connection
@@ -72,23 +80,25 @@
         }//Modifies input for use
         function send_data($bleh,$Name,$Scr,$t)
         {
-        	echo "Entered send_data with values <br> Name: ".$Name."<br> Screen: ".$Scr."<br> Time: ".$t;
+        	//echo "Entered send_data with values <br> Name: ".$Name."<br> Screen: ".$Scr."<br> Time: ".$t;
         	if ($bleh) 
         	{
-        		$qry = "INSERT INTO `moviet` (`Name`, `Screen`, `Time`) VALUES ('".$Name."', '".$Scr."', '".$t."')";
-        		$chkQu = "SELECT `Screen`,`Time` FROM `moviet` WHERE `Screen` LIKE '".$Screen."' AND `Time` LIKE '".$t."'";
+        		
+        		$chkQu = "SELECT `Screen`,`Time` FROM `moviet` WHERE `Screen` LIKE \"".$Scr."\" AND `Time` = \"".$t."\"";
         		$res = $GLOBALS['conn']->query($chkQu);
         		if (!($res->num_rows != 0)) 
         		{
-        			$val = $GLOBALS['conn']->query($qry);
-        			if ($val) 
+        			
+   				 	$qry = "INSERT INTO `moviet` (`Name`, `Screen`, `Time`) VALUES (\"".$Name."\", \"".$Scr."\", \"".$t."\")";
+        			$res = $GLOBALS["conn"]->query($qry);
+        			if ($res) 
         			{
-        				$GLOBALS['Finerr'] = "Added Succesfully";
+        				$GLOBALS["Finerr"] = "Added Succesfully";
         			}
 
         			else
         			{
-        				echo "Error: <br>" .$conn->error;
+        				echo "Error: <br>"; 
         			}
 
 	        	}
@@ -100,41 +110,9 @@
         }
 
 		?>
-		<ul>
-  <li><a href="addmovie.php">ADD MOVIE</a></li>
-  <li><a class="active" href="">ADD SHOW</a></li>
-  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
-  <li><a href="deleteshow.php">DELETE SHOW</a></li>
-  <li><a href="admin_reg.php">REGISTER ADMIN</a></li>
-  <li><a href="logout.php">LOGOUT</a></li>
 
-
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		 <div class="container-fluid">
-    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Add Show</h1></center><br><br><br>
-    <div class="d-flex justify-content-center">
-
-    	<div class="pos">
-		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 	<div class="row form-group">
-	 		<div class="col-sm-4">
-			<label >Movie's Name :</label></div>
-			<div class="col-sm-6">
+		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
+			<label >Movie's Name :</label>
 				<select name="Mvnm">
 				<?php
 					$sql = "SELECT Name FROM `deets`";
@@ -147,12 +125,9 @@
 				  ?> 
 				</select>
 				<span class="error">*<?php echo $Mvnmerr;?> </span>	
-			</div></div>
+			<br>
 
-			<div class="row form-group">
-	 		<div class="col-sm-4">
-			<label >Screen :</label></div>
-			<div class="col-sm-6">
+			<label >Screen :</label>
 				<select name="Scnm">
 				<?php
 					$sql = "SELECT * FROM `screens`";
@@ -165,17 +140,11 @@
 				  ?> 
 				</select>
 				<span class="error">*<?php echo $Scnmerr;?> </span>
-			</div></div>
+			<br>
 
-			<div class="row form-group">
-	 		<div class="col-sm-4">
-			<label>Time:</label></div>
-			<div class="col-sm-6">
-				</div></div>
-			<div class="row form-group">
-	 		<div class="col-sm-4">
-				<label>Hour</label></div>
-				<div class="col-sm-6">
+			<label>Time:</label>
+				<br>
+				<label>Hour</label>
 				<select name="hr">
 					<option value="9"selected>9</option> <!-- Default -->
 
@@ -186,12 +155,8 @@
 					}  
 				?>
 				</select>
-				</div></div>
-
-				<div class="row form-group">
-	 		<div class="col-sm-4">		
-				<label>Minute</label></div>
-				<div class="col-sm-6">
+		
+				<label>Minute</label>
 				<select name="min">
 					<option value="00"selected>00</option> <!-- Default -->
 					
@@ -204,14 +169,19 @@
 					}  
 				?>
 				</select>
-				</div></div>
+				<br>
 
-			<center><button class="btn btn-primary hvr-float" type="submit">Add</button></center>
-			       <br>
-			<span class="error">*<?php echo $Finerr;?> </span>
+			<button type="submit">Submit</button>
+			<br>
+			<span class="error"><?php echo $Finerr;?> </span>
 
 		</form>
-		</div></div></div>
+		
 		<br>
+
+		
+
+	
+
 </body>
 </html>

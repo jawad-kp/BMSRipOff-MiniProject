@@ -1,4 +1,10 @@
-
+<?php
+	session_start();
+	if (!(isset($_SESSION["adm"]))) 
+	{
+		die("Illegal Access");
+	}  
+  ?>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +13,7 @@
   	<meta charset="utf-8">
   	<meta name="viewport" content="width= device-width, initial-scale=1">
   	<style type="text/css">
-  		.error{ color: red; font-size: 16px }
+  		.error{ color: yellow; font-size: 16px }
   	</style>
   	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="regPage.css">
@@ -22,7 +28,7 @@
 	$username = "root";
 	$db = "bmsripoff";
 	$password = "";
-
+	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
 
@@ -61,7 +67,7 @@
 
 	    if(empty($_POST["pass"]))
 	    {
-	        $pswderr="Please enter a valid Name";
+	        $pswderr="Please enter a valid Password";
 	        $boo = false;
 	    }
 	    else
@@ -71,7 +77,7 @@
 
 	    if(empty($_POST["RePass"]))
 	    {
-	        $reperr="Please enter a valid Name";
+	        $reperr="Please enter a valid Password";
 	        $boo = false;
 	    }
 	    else
@@ -130,7 +136,7 @@
 		    		// 	echo "Account not Created";
 		    	}//User id is not in use
 		    	else
-		    		$uiderr = "User ID is in use";
+		    		$GLOBALS["uiderr"] = "User ID is in use";
 		    	$GLOBALS['conn']->close();
 			}
 
@@ -145,36 +151,57 @@
 	 <form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
 	<!-- <form name="HenloFrens" method = "post" > -->
 		<div class="row form-group">
-	 		<div class="col-sm-4">
-				<label class = "lab" style="color: black">Name </label>
+	 		<div class="col-sm-3">
+				<label class = "lab" style="color:white;">Name </label>
 			</div>
-			</div>
-			<div class="row form-group">
 			<div class="col-sm-6">
-		<input type="text" name="nm" placeholder="Your name..." size="50"; style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">* <?php echo $nmerr;?></span>	
-		</div></div>
+				<input type="text" name="nm" placeholder="Your name" class="form-control">
+			</div>
+			<div  class="error col-sm-3">* 
+				<?php echo $nmerr;?>
+					
+			</div>	
+		</div>
+
 
 		<div class="row form-group">
-			<div class="col-sm-4">
-
-		<label >Admin ID</label>
-		<input type="text" name="uid" placeholder="User ID" size="50" style="width: 300px; height: 30px; border-radius: 5px;">
-		<span class="error">*  <?php echo $uiderr;?> </span>	
-		</div></div>
+			<div class="col-sm-3">
+				<label class = "lab" style="color:white;">Admin ID</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" name="uid" placeholder="User ID" class="form-control">
+			</div>
+			<div  class="error col-sm-3">*  
+				<?php echo $uiderr;?> 
+			</div>	
+		</div>
 
 		<div class="row form-group">
-			<div class="col-sm-4">
-		<label>Password</label>
-           <input type="password" placeholder="Enter Password" name="pass">
-           <span class="error">* <?php echo $pswderr;?> </span>	
-         </div>	
-         <div class="col-sm-6">
-         <label>Re-Type Password</label>
-           <input type="password" placeholder="Enter Password" name="RePass">
-           <span class="error">* <?php echo $reperr;?> </span>	
-         </div></div>
+			<div class="col-sm-3">
+				<label class = "lab" style="color:white;">Password</label>
+			</div>
+			<div class="col-sm-6">
+           		<input type="password" placeholder="Enter Password" name="pass" class="form-control">
+           	</div>
+           	<div  class="error col-sm-3">* 
+           		<?php echo $pswderr;?> 
+           </div>
 
+        </div>
+
+        <div class="row form-group">
+
+	        <div class="col-sm-3">
+	         	<label class = "lab" style="color:white;">Re-Type Password</label>
+	     	</div>
+	     	<div class="col-sm-6">
+           		<input type="password" placeholder="Enter Password" name="RePass" class="form-control" >
+           	</div>
+           	<div class="col-sm-3 error">*
+           	 	<?php echo $reperr;?> 
+           	</div>
+
+         </div>
          <div class="row">
         	<div class="col-sm"></div>
         	<div class="col-sm">

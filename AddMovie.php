@@ -28,6 +28,8 @@ if (!(isset($_SESSION["adm"]))) {
 	$username = "root";
 	$db = "bmsripoff";
 	$password = "";
+	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
 	// Check connection
@@ -35,7 +37,7 @@ if (!(isset($_SESSION["adm"]))) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
 	//echo "Connected successfully <br>";
-	$mverr=$synerr=$raterr=$langerr="";
+	$mverr=$synerr=$raterr=$langerr=$btmstat="";
     $mvnm=$synopsis=$rating=$lang="aa";
     $boo= true; //this is our flag to make sure registration is legit
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -89,20 +91,18 @@ if (!(isset($_SESSION["adm"]))) {
         }//this removes trailing spaces and makes it an html element so you can't rip it off don't know why stripslashes but meh but it sorta removes the special characters if the user adds any.
         function send_data($bleh,$MovieName,$Synop,$PGRating, $Language)
         { 
-        	echo "Entered send_data with value: ".$bleh."<br>"."Movie's Name".$MovieName."<br>"."Synopsis: ".$Synop."<br>"."Rating: ".$rating."<br>"."Language: ".$Language."<br>";
 	    	if($bleh)
 	    	{
 		    	$qry = "INSERT INTO `deets` (`Name`, `Synop`, `PGRating`, `Language`) VALUES (?,?,?,?)";
 		    	
 		    	$prepStmt = $GLOBALS['conn']->prepare($qry);//This works simliar to the Java thingy where we create a prepared statement
-		    	$chkQu = "SELECT `Name` FROM `deets` WHERE `Name` LIKE ".$MovieName;
+		    	$chkQu = "SELECT `Name` FROM `deets` WHERE `Name` LIKE \"".$MovieName."\"";
 		    	$res = $GLOBALS['conn']->query($chkQu);
 		    	if (!($res->num_rows != 0))
 		    	{
 		    		$prepStmt->bind_param("ssss",$MovieName,$Synop,$PGRating,$Language);
-		    		//echo "Statement prepared<br>";
 		    		$prepStmt->execute();
-		    		//echo "Data sent Successfully";
+		    		$GLOBALS["btmstat"] = "Movie Added Successfully";
 		    	}//No other Movie of the same name
 		    	else
 		    		$GLOBALS['mverr'] = "Movie has already been added. Please Use a different name";
@@ -178,6 +178,8 @@ if (!(isset($_SESSION["adm"]))) {
          
 
          <center><button class="btn btn-primary hvr-grow" type="submit">Add</button></center>
+
+         <h3> <?php echo $btmstat;?> </h3>
 			       <br>
 			       
 

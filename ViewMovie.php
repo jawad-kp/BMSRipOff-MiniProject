@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if (!(isset($_SESSION["user"]))) {
+	die("You are Illegally Accessing this page:");
+}
  ?>
 
 <!DOCTYPE html>
@@ -39,6 +42,7 @@ session_start();
 	
 </head>
 <body>
+
 	<h1>Now Showing: </h1>
 
 	<!-- <form method="POST" action="SaveNameData.php"> -->
@@ -54,6 +58,8 @@ session_start();
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
+
+
 	$qu = "Select DISTINCT `Name` from `MovieT`";
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
@@ -82,7 +88,12 @@ session_start();
   	}
   }
  ?>
+ <br>
+ <br>
  <a href="http://localhost:8080/DBMS/ViewBookings.php" style="text-decoration: none; color: red; border-color: black;" > Click Here To View Your Existing Bookings</a>
+ <br>
+ <br>
+ <a href="Logout.php">Logout</a>
 
 </body>
 </html>

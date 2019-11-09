@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!(isset($_SESSION["user"])))
+ {
+	die("Maccha Please, Don't Maccha");
+}
  ?>
 
 
@@ -73,6 +77,13 @@ session_start();
 		 }
 
 	  ?>
+	  <br>
+	  <br>
+
+	  <a href="ViewMovie.php">Click Here View Now Showing Movies</a>
+	  <br>
+	  <br>
+	  <a href="Logout.php">Logout</a>
 
 	  </div>
 
