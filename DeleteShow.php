@@ -6,6 +6,7 @@
 	<!-- <script src="jquery-3.4.1.min.js"></script> -->
 
 	<script type="text/javascript">
+
 $(document).ready(function(){
 	var rk = "";
 	var disone5you ="no";
@@ -48,6 +49,11 @@ $(document).ready(function(){
     });
 });
 </script>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="l2.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<?php
@@ -138,9 +144,26 @@ $(document).ready(function(){
         }
 
 	?>
+<ul>
+  <li><a href="addmovie.php">ADD MOVIE</a></li>
+  <li><a href="addshow.php">ADD SHOW</a></li>
+  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
+  <li><a class="active" href="">DELETE SHOW</a></li>
+  <li><a href="admin_reg.php">REGISTER ADMIN</a></li>
+  <li><a href="logout.php">LOGOUT</a></li>
 
+
+</ul>
+	<div class="container-fluid">
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Delete Movie</h1></center><br><br><br>
+    <div class="d-flex justify-content-center">
+
+    <div class="pos">
 	<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
-			<label >Movie's Name :</label>
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label >Movie's Name :</label></div>
+			<div class="col-sm-6">
 				<select name="Name" id="name">
 					<option value="">Select a Movie </option>
 				<?php
@@ -154,22 +177,29 @@ $(document).ready(function(){
 				  ?> 
 				</select>
 				<span class="error">* <?php echo $mverr;?></span>
-			<br>
-			<label >Screen :</label>
+			</div></div>
+			<div class="row form-group">
+	 	<div class="col-sm-4">
+			<label >Screen :</label></div>
+				<div class="col-sm-6">
 				<select name="Screen" id="screen">
 			        <option value="">Select Movie first</option>
 			    </select>
 			    <span class="error">* <?php echo $scerr;?></span>
-			<br>
-			<label >Time :</label>  
+			</div></div>
+			<div class="row form-group">
+	 	<div class="col-sm-4">
+			<label >Time :</label> </div>
+			<div class="col-sm-6"> 
 			    <select name="Time" id="time">
 			        <option value="">Select Time first</option>
 			    </select>
 			    <span class="error">* <?php echo $timerr;?></span>
-			    <br>
-			    <button type="submit">Submit</button>	
+			    </div></div>
+			    <center><button class="btn btn-primary hvr-float" type="submit">Delete</button></center>
+			       <br>		
 
-			    </form>		
+			    </form>	</div></div></div>	
 			    <?php echo $btm;?>
 
 
