@@ -64,7 +64,7 @@
 	    }//password
 	    if($boo)
 	    {
-	    	$qry = $sql = "SELECT `pass` FROM `login` WHERE uid LIKE '".$uid."'";
+	    	$qry = $sql = "SELECT `pass`, `Name` FROM `login` WHERE uid LIKE '".$uid."'";
 	    	echo $qry."<br>";
 	    	$res = $conn->query($qry);
 	    	if ($res->num_rows > 0)
@@ -78,6 +78,7 @@
 		    	if(password_verify($pswd, $dbPass))
 		    	{
 		    		$_SESSION["user"] = $uid;
+		    		$_SESSION["username"] = $row["Name"];
 		    		header("Location: http://localhost:8080/DBMS/ViewMovie.php");
 		    	}
 		    	else
