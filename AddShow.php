@@ -17,6 +17,12 @@
   	<style type="text/css">
   		.error{ color: red; font-size: 16px }
   	</style>
+
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="l2.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -111,8 +117,28 @@
 
 		?>
 
-		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 
-			<label >Movie's Name :</label>
+
+		<ul>
+	<li><a class="active" href="">ADD SHOW</a></li>
+  <li><a href="addmovie.php">ADD MOVIE</a></li>
+  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
+  <li><a href="deleteshow.php">DELETE SHOW</a></li>
+  <li><a href="admin_reg.php">REGISTER ADMIN</a></li>
+  <li><a href="logout.php">LOGOUT</a></li>
+
+
+	</ul>
+
+		<div class="container-fluid">
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Add Show</h1></center><br><br><br>
+    <div class="d-flex justify-content-center">
+
+    	<div class="pos">
+		<form name="HenloFrens" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" > 	
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label >Movie's Name :</label></div>
+			<div class="col-sm-6">
 				<select name="Mvnm">
 				<?php
 					$sql = "SELECT Name FROM `deets`";
@@ -124,10 +150,15 @@
 					}
 				  ?> 
 				</select>
-				<span class="error">*<?php echo $Mvnmerr;?> </span>	
+				<span class="error"><?php echo $Mvnmerr;?> </span>	
 			<br>
 
-			<label >Screen :</label>
+			</div></div>
+
+			<div class="row form-group">
+	 		<div class="col-sm-4">
+			<label >Screen :</label></div>
+			<div class="col-sm-6">
 				<select name="Scnm">
 				<?php
 					$sql = "SELECT * FROM `screens`";
@@ -139,44 +170,63 @@
 					}
 				  ?> 
 				</select>
-				<span class="error">*<?php echo $Scnmerr;?> </span>
+				<span class="error"><?php echo $Scnmerr;?> </span>
 			<br>
 
-			<label>Time:</label>
-				<br>
-				<label>Hour</label>
-				<select name="hr">
-					<option value="9"selected>9</option> <!-- Default -->
+			</div></div>
 
-				<?php
-					for ($i=10; $i <24; $i++) 
-					{ 
-					  	echo "<option value=\"".$i."\">".$i."</option>" ;//to avoid typing out everything
-					}  
-				?>
-				</select>
+			<div class="row form-group">
+		 		<div class="col-sm-4">
+					<label>Time:</label>
+				</div>
+			</div>
+			<div class="row form-group">
+		 		<div class="col-sm">
+					<label>Hour</label>
+				</div>
+				<div class="col-sm">
+					<select name="hr">
+						<option value="9"selected>9</option> <!-- Default -->
+
+					<?php
+						for ($i=10; $i <24; $i++) 
+						{ 
+						  	echo "<option value=\"".$i."\">".$i."</option>" ;//to avoid typing out everything
+						}  
+					?>
+					</select>
 		
-				<label>Minute</label>
-				<select name="min">
-					<option value="00"selected>00</option> <!-- Default -->
-					
+				</div>
+
+	 			<div class="col-sm">		
+					<label>Minute</label>
+				</div>
+				<div class="col-sm">
+					<select name="min">
+						<option value="00"selected>00</option> <!-- Default -->
+						
 
 
-				<?php
-					for ($i=15; $i <= 45; $i +=15 ) 
-					{ 
-					  	echo "<option value=\"".$i."\">".$i."</option>" ;//to avoid typing out everything
-					}  
-				?>
-				</select>
-				<br>
+					<?php
+						for ($i=15; $i <= 45; $i +=15 ) 
+						{ 
+						  	echo "<option value=\"".$i."\">".$i."</option>" ;//to avoid typing out everything
+						}  
+					?>
+					</select>
 
-			<button type="submit">Submit</button>
-			<br>
+				</div>
+			</div>
+
+			<center><button class="btn btn-primary hvr-float" type="submit">Add</button></center>
+			       <br>
 			<span class="error"><?php echo $Finerr;?> </span>
+				
 
 		</form>
-		
+		</div></div>
+ 
+		</div></div></div>
 		<br>
 
 		
