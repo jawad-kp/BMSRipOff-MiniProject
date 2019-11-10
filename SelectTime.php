@@ -37,34 +37,37 @@ session_start();
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="row form-group">
+	<div class="row form-group">
+	<div class="row form-group">
+	<div class="row form-group">
+	<div class="row form-group">
+	<div class="row form-group">
+	</div></div></div></div></div></div>
 	<?php
 	if(!(isset($_SESSION["Movie"])))
 	{
-
 		die("No Movie Selected");
 	}
-
 	$servername = "127.0.0.1";
 	$username = "root";
 	$db = "bmsripoff";
 	$password = "";
-
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);//creating a connection object
-
 	// Check connection
 	if ($conn->connect_error ) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-
 	$qu = "Select `Time`, `Screen` from `moviet` where `Name` Like \"". $_SESSION["Movie"]."\"";
 	//echo $qu;
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
 	{	echo "<center>";
 		while($row = $res->fetch_assoc()) 
-		{
-			echo "<button class=\"btn btn-info hvr-float\"  value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br>";
+		{	
+
+			echo "<button class=\"btn btn-info hvr-float btn-lg\"  value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br><div class=\"row form-group\"";
 		}
 		echo "</center";
 	 }
@@ -76,5 +79,3 @@ session_start();
 
 </body>
 </html>
-
-
