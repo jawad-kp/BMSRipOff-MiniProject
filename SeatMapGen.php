@@ -11,6 +11,16 @@ if (!(isset($_SESSION["user"]))) {
 	<title>Select Your Seats</title>
 		<link rel="stylesheet" type="text/css" href="pretty-checkbox/dist/pretty-checkbox.css">
 		<!-- <link rel="stylesheet" type="text/css" href="l1.css"> -->
+		<meta charset="utf-8">
+  	<meta name="viewport" content="width= device-width, initial-scale=1">
+  	<style type="text/css">
+  		.error{ color: yellow; font-size: 16px }
+  	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="seat.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		
 </head>
 	<body>
@@ -102,7 +112,9 @@ if (!(isset($_SESSION["user"]))) {
 
 			  ?>
 			  <br>
-			  <h2>--------------------</h2>
+			  
+
+			  <div class="trapezoid"></div>
 			  <h2> Screen This Way </h2>
 			  <br>
 			  <button type="submit">Submit</button> 

@@ -24,6 +24,17 @@ session_start();
 			})
 		})
 	</script>
+
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width= device-width, initial-scale=1">
+  	<style type="text/css">
+  		.error{ color: yellow; font-size: 16px }
+  	</style>
+  	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="l2.css">
+  <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
+  <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">
+  	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<?php
@@ -50,11 +61,12 @@ session_start();
 	//echo $qu;
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
-	{	
+	{	echo "<center>";
 		while($row = $res->fetch_assoc()) 
 		{
-			echo "<button value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br>";
+			echo "<button class=\"btn btn-info hvr-float\"  value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br>";
 		}
+		echo "</center";
 	 }
 	 else
 	 {
