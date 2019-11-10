@@ -1,7 +1,27 @@
 .trapezoid {
-	border-bottom: 50px solid #555;
-	border-left: 25px solid transparent;
-	border-right: 25px solid transparent;
-	height: 0;
+	border-bottom: 5vw solid #565656;
+	border-left: 2vw solid transparent;
+	border-right: 2vw solid transparent;
+	height: 1vw;
 	width: 100%;
+	/*background-color: blue;*/
+}
+.bgrfnt
+{
+	font-size: 18px;
+	border-radius: 3px;
+	border: none; 
+}
+
+.evenbgrfnt{
+	font-size: 24px;
+}
+
+body{
+	background-color: #F0F0F0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	color: black;
 }

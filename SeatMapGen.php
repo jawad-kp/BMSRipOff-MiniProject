@@ -15,6 +15,19 @@ if (!(isset($_SESSION["user"]))) {
   	<meta name="viewport" content="width= device-width, initial-scale=1">
   	<style type="text/css">
   		.error{ color: yellow; font-size: 16px }
+  		body{
+	/*background-image: url(adminbg.jpg);*/
+	/*background-color: black;*/
+	width: 100%;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	color: white;
+}
   	</style>
   	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="seat.css">
@@ -82,7 +95,7 @@ if (!(isset($_SESSION["user"]))) {
 	?>
 		<form name="MapOfDaSeat" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 			<?php
-				$SeatMap = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+				$SeatMap = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 				$qry = "Select `Sno` from `".$_SESSION["ScrNm"]."` WHERE `TIME` = \"".$_SESSION["MovieTime"]."\"";
 				$res = $conn->query($qry);
 				if($res->num_rows > 0)
@@ -93,32 +106,48 @@ if (!(isset($_SESSION["user"]))) {
 					}
 				}
 				//Now we generate the checkboxes
+				echo "<br> <br> <center>";
 				for ($i=0; $i < count($SeatMap) ; $i++) 
 				{ 
+					if ( (($i) % 20 == 0) && (($i)<count($SeatMap)) ) 
+					{
+						// echo "</center>";//closing previous center tag
+						echo "<br>";
+						echo "<br>";
+						// echo "<center>";//opening center tag
+					}
 					if($SeatMap[$i] == 0)
 					{
 						echo "<div class=\"pretty p-default p-curve p-fill p-bigger\"> <input type = 'checkbox' name = 'seat[]' value='".($i+1)."' ><div class=\"state p-success\"><label></label></div></div>";
 					}
 					if ($SeatMap[$i] == 1) 
 					{
-						echo "<div class=\"pretty p-default p-curve p-fill \"><input type = 'checkbox' name = 'seat[]' value='".($i+1)."'disabled><div class=\"state p-success\"><label></label></div></div>";
+						echo "<div class=\"pretty p-default p-curve p-fill \"><input type = 'checkbox' name = 'seat[]' value='".($i+1)."'disabled><div class=\"state p-success bgrfnt\"><label></label></div></div>";
 					}
-					if (($i+1) % 4 == 0 ) 
+					
+					if ((($i) % 10 == 0) && (!(($i) % 20 == 0) || ( ($i-1) == 0)))
 					{
-						echo "<br><br>";
+						echo "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
 					}
 
 				}
 
 			  ?>
-			  <br>
-			  
-
+			</center>
+			<br>
+			<br> 
 			  <div class="trapezoid"></div>
-			  <h2> Screen This Way </h2>
+			  <center>
+			  	<h2> Screen This Way </h2>
+			  </center>
 			  <br>
-			  <button type="submit">Submit</button> 
-			
+			 
+			<center>
+			  	<button type="submit" class="btn btn-primary hvr-grow evenbgrfnt">Submit</button> 
+			</center>
+			<br>
+			<br>
+			&nbsp 
 		</form>
 	</body>
 </html>
