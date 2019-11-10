@@ -10,7 +10,7 @@ session_start();
     <style type="text/css">
       .error{ color: red; font-size: 16px }
     </style>
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="lo.css">
   <link rel="stylesheet" type="text/css" href="Hover-master/css/hover.css">
   <link rel="stylesheet" type="text/css" href="CSS Animations/animate.css">

@@ -37,13 +37,8 @@ session_start();
   	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="row form-group">
-	<div class="row form-group">
-	<div class="row form-group">
-	<div class="row form-group">
-	<div class="row form-group">
-	<div class="row form-group">
-	</div></div></div></div></div></div>
+	<div class="container-fluid">
+	<br><br><br><br><br>
 	<?php
 	if(!(isset($_SESSION["Movie"])))
 	{
@@ -63,19 +58,27 @@ session_start();
 	//echo $qu;
 	$res = $conn->query($qu);
 	if ($res->num_rows > 0) 
-	{	echo "<center>";
+	{	
 		while($row = $res->fetch_assoc()) 
-		{	
+		{	echo "<div class = \"row\">";
+				echo "<div class = \"col-sm-5\"></div>";
+				echo "<div class = \"col-sm-1\">";
+					echo "<button class=\"btn btn-info hvr-float btn-lg\"  value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button>";
+				echo "</div>";
+				echo "<div class = \"col-sm-5\"></div>";
+			echo "</div><br><br>";
 
-			echo "<button class=\"btn btn-info hvr-float btn-lg\"  value = \"".$row["Time"]."\" abd = \"".$row["Screen"]."\">".$row["Time"]."</button><br><div class=\"row form-group\"";
+
 		}
-		echo "</center";
+		
 	 }
 	 else
 	 {
 	 	echo "No Shows Available";
 	 } 
 	  ?>
+
+	  </div>
 
 </body>
 </html>
