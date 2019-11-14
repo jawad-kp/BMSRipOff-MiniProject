@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2019 at 02:24 PM
+-- Generation Time: Nov 14, 2019 at 10:59 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -24,12 +24,24 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `bmsripoff` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `bmsripoff`;
 
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `UpdateForSalesStat`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateForSalesStat` (IN `MvName` VARCHAR(50))  MODIFIES SQL DATA
+    COMMENT 'The Procedure Updates the Number of Tkts Sold for a given Movie'
+UPDATE salesstat set TktsSold = TktsSold+1 WHERE Name LIKE MvName$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `admin_log`
 --
 
+DROP TABLE IF EXISTS `admin_log`;
 CREATE TABLE `admin_log` (
   `Admin` varchar(200) NOT NULL,
   `Pass` varchar(500) NOT NULL,
@@ -41,8 +53,11 @@ CREATE TABLE `admin_log` (
 --
 
 INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
-('ad', '$2y$10$rqfLxg18oq7R2Dqu7Tg8LObClMlxlqeEkr0Htkv2C7lqFtkhReaPi', 'admin'),
-('AllenNo1', '$2y$10$9j/RKOFi19epwxDSDuOGO.Tkh6DlNRRdflSzlSh.HDqlOZCshg/IG', 'Allleeeeeen');
+('a', '$2y$10$U/Mc2Y.eAQQ3MxEBYna2YuJ.UxD30YvNdXAAug3J88LVwQJ4dRoeS', 'a'),
+('abbasIsBadPerson', '$2y$10$VJtYu/Rn2ugMgMtqkg4Bj.Ku7hh7/T1wTIvxcsSY5fJFoYsVJ/d3G', 'abbaa'),
+('ad', '$2y$10$gs.i3Oao1Clisz1H1gevGeN3DctVJPVmMoue4tyunb1V372F7oaWm', 'ad'),
+('AllenNo1', '$2y$10$pls5VPZ5PddFFdpYklFv/OZU6wZ.Gaw8/VL8nDglMD1kFTxxEgd.2', 'Allen'),
+('studboii', '$2y$10$791yRIrdeQOBidjSpln5ieSNrWbTKUcsJbHjUZ0vqKCG6ZOvw.Rh6', 'Jawad');
 
 -- --------------------------------------------------------
 
@@ -50,6 +65,7 @@ INSERT INTO `admin_log` (`Admin`, `Pass`, `Name`) VALUES
 -- Table structure for table `bookings`
 --
 
+DROP TABLE IF EXISTS `bookings`;
 CREATE TABLE `bookings` (
   `uid` varchar(50) NOT NULL,
   `Bid` varchar(50) NOT NULL,
@@ -62,7 +78,18 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`uid`, `Bid`, `MvName`, `Screen`) VALUES
-('a', 'aSeatS4Your Mom is Existential6394', 'Your Mom is Existential', 's1');
+('hrst', 'hrstSeatS2MURICA BEST6178', 'MURICA BEST', 's3'),
+('hrst', 'hrstSeatS3Funeral Time9133', 'Funeral Time', 's1'),
+('sk', 'skSeatS3MURICA BEST9855', 'MURICA BEST', 's3');
+
+--
+-- Triggers `bookings`
+--
+DROP TRIGGER IF EXISTS `ReduceTicketsSoldInSalesStat`;
+DELIMITER $$
+CREATE TRIGGER `ReduceTicketsSoldInSalesStat` AFTER DELETE ON `bookings` FOR EACH ROW UPDATE salesstat SET TktsSold = TktsSold-1 WHERE Name LIKE OLD.MvName
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -70,6 +97,7 @@ INSERT INTO `bookings` (`uid`, `Bid`, `MvName`, `Screen`) VALUES
 -- Table structure for table `deets`
 --
 
+DROP TABLE IF EXISTS `deets`;
 CREATE TABLE `deets` (
   `Name` varchar(50) NOT NULL,
   `Synop` mediumtext,
@@ -90,12 +118,22 @@ INSERT INTO `deets` (`Name`, `Synop`, `PGRating`, `Language`) VALUES
 ('Your Mom is Existential', 'Snake... why are we still here? Just to suffer? Every night, I can feel my leg and my arm... even my fingers... the body I\'ve lost... the comrades I\'ve lost... won\'t stop hurting. It\'s like they\'re all still there. You feel it too, don\'t you? I\'m the one who got caught up with Cipher. A group above nations... even the US. And I was the parasite below, feeding off Zero\'s power. They came after you in Cyprus... then Afghanistan... Cipher... just keeps growing. Swallowing everything in it\'s path. Getting bigger and bigger... Who knows how big now? Boss. I\'m gonna make \'em give back our past... take back everything that we\'ve lost. And I won\'t rest... until we do.', 'A', 'English'),
 ('your nt niec', 'Give it up folks, einstein over here has something to say. What\'s that buddy? Wha- A grammatical error?!? WHAT?!? B... Bu... That can\'t be possible! Surely not! A GRAMMAR MISTAKE? IN MY SIGHT?!? What a great, absolute miracle that you and your 257 IQ Brain was here to correct it! Thank you! Have my grattitude, Actually, What\'s your cashapp? I\'d like to give you 20$... Know what? While we\'re at it have the keys to my car. Actually, no, scratch that. Have the keys to my house, go watch my kids grow up and fuck my wife. Also, my Paypal username and password is: Ilikesmartazzes4 and 968386329. Go have fun. Thank you for your work.ï»¿', 'UA', 'English');
 
+--
+-- Triggers `deets`
+--
+DROP TRIGGER IF EXISTS `DeetsTriggerForSalesStat`;
+DELIMITER $$
+CREATE TRIGGER `DeetsTriggerForSalesStat` AFTER INSERT ON `deets` FOR EACH ROW INSERT INTO `salesstat` (`Name`, `TktsSold`) VALUES (NEW.Name, 0)
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `login`
 --
 
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `uid` varchar(50) NOT NULL,
   `pass` varchar(500) NOT NULL,
@@ -109,7 +147,9 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES
 ('a', '$2y$10$TNHx2r6mKSgVCtT/99khHOk89MTWh939xq9evMLqNxC.72GoK2.ue', 'a'),
 ('b', '$2y$10$fjNHG1p1lMtLP1Xum1HLZ.xJ5uRcm1eScqzFn16wj4ZWjo5.JLY62', 'b'),
-('c', '$2y$10$pEXWoTPEIkbraN9y1Hz1J.MPnUwNQIi3576kALUQZMWOfKroBs.g6', 'c');
+('c', '$2y$10$pEXWoTPEIkbraN9y1Hz1J.MPnUwNQIi3576kALUQZMWOfKroBs.g6', 'c'),
+('hrst', '$2y$10$oU7pyVdsQV4CdzgoSYO2xuevyghma5w1lEMZrseFZ69Xa4pwGCE6m', 'Diwakar'),
+('sk', '$2y$10$xuaJOCC3a9bFEpUEid75KusxYrSmc8jX8j63HWHdwfw4gS.hANxJG', 'savitri');
 
 -- --------------------------------------------------------
 
@@ -117,6 +157,7 @@ INSERT INTO `login` (`uid`, `pass`, `Name`) VALUES
 -- Table structure for table `moviet`
 --
 
+DROP TABLE IF EXISTS `moviet`;
 CREATE TABLE `moviet` (
   `Name` varchar(50) NOT NULL,
   `Screen` varchar(3) NOT NULL,
@@ -129,8 +170,11 @@ CREATE TABLE `moviet` (
 
 INSERT INTO `moviet` (`Name`, `Screen`, `Time`) VALUES
 ('Funeral Time', 's1', '09:00:00'),
-('Funeral Time', 's2', '09:00:00'),
-('Your Mom is Existential', 's1', '12:00:00');
+('Funeral Time', 's1', '16:00:00'),
+('Funeral Time', 's2', '20:15:00'),
+('Incel The Movie', 's2', '09:00:00'),
+('MURICA BEST', 's3', '09:00:00'),
+('your nt niec', 's1', '15:30:00');
 
 -- --------------------------------------------------------
 
@@ -138,6 +182,7 @@ INSERT INTO `moviet` (`Name`, `Screen`, `Time`) VALUES
 -- Table structure for table `s1`
 --
 
+DROP TABLE IF EXISTS `s1`;
 CREATE TABLE `s1` (
   `Sno` int(11) NOT NULL,
   `bid` varchar(50) NOT NULL,
@@ -149,10 +194,9 @@ CREATE TABLE `s1` (
 --
 
 INSERT INTO `s1` (`Sno`, `bid`, `Time`) VALUES
-(1, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
-(2, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
-(3, 'aSeatS4Your Mom is Existential6394', '12:00:00'),
-(4, 'aSeatS4Your Mom is Existential6394', '12:00:00');
+(49, 'hrstSeatS3Funeral Time9133', '14:00:00'),
+(50, 'hrstSeatS3Funeral Time9133', '14:00:00'),
+(51, 'hrstSeatS3Funeral Time9133', '14:00:00');
 
 -- --------------------------------------------------------
 
@@ -160,6 +204,7 @@ INSERT INTO `s1` (`Sno`, `bid`, `Time`) VALUES
 -- Table structure for table `s2`
 --
 
+DROP TABLE IF EXISTS `s2`;
 CREATE TABLE `s2` (
   `Sno` int(11) NOT NULL,
   `bid` varchar(50) NOT NULL,
@@ -172,11 +217,23 @@ CREATE TABLE `s2` (
 -- Table structure for table `s3`
 --
 
+DROP TABLE IF EXISTS `s3`;
 CREATE TABLE `s3` (
   `Sno` int(11) NOT NULL,
   `bid` varchar(50) NOT NULL,
   `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Booked seats for a given show';
+
+--
+-- Dumping data for table `s3`
+--
+
+INSERT INTO `s3` (`Sno`, `bid`, `Time`) VALUES
+(1, 'hrstSeatS2MURICA BEST6178', '09:00:00'),
+(2, 'skSeatS3MURICA BEST9855', '09:00:00'),
+(3, 'skSeatS3MURICA BEST9855', '09:00:00'),
+(4, 'skSeatS3MURICA BEST9855', '09:00:00'),
+(46, 'hrstSeatS2MURICA BEST6178', '09:00:00');
 
 -- --------------------------------------------------------
 
@@ -184,6 +241,7 @@ CREATE TABLE `s3` (
 -- Table structure for table `s4`
 --
 
+DROP TABLE IF EXISTS `s4`;
 CREATE TABLE `s4` (
   `Sno` int(11) NOT NULL,
   `bid` varchar(50) NOT NULL,
@@ -193,9 +251,35 @@ CREATE TABLE `s4` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `salesstat`
+--
+
+DROP TABLE IF EXISTS `salesstat`;
+CREATE TABLE `salesstat` (
+  `Name` varchar(50) NOT NULL,
+  `TktsSold` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesstat`
+--
+
+INSERT INTO `salesstat` (`Name`, `TktsSold`) VALUES
+('Funeral Time', 6),
+('Hit Or Miss', 0),
+('Incel The Movie', 0),
+('MURICA BEST', 5),
+('Thor 2 The Dark World', 0),
+('Your Mom is Existential', 0),
+('your nt niec', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `screens`
 --
 
+DROP TABLE IF EXISTS `screens`;
 CREATE TABLE `screens` (
   `SName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -277,6 +361,12 @@ ALTER TABLE `s4`
   ADD KEY `BidLinkForScreen4` (`bid`);
 
 --
+-- Indexes for table `salesstat`
+--
+ALTER TABLE `salesstat`
+  ADD PRIMARY KEY (`Name`);
+
+--
 -- Indexes for table `screens`
 --
 ALTER TABLE `screens`
@@ -323,6 +413,12 @@ ALTER TABLE `s3`
 --
 ALTER TABLE `s4`
   ADD CONSTRAINT `BidLinkForScreen4` FOREIGN KEY (`bid`) REFERENCES `bookings` (`Bid`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `salesstat`
+--
+ALTER TABLE `salesstat`
+  ADD CONSTRAINT `StatsNameLinkToDeetsName` FOREIGN KEY (`Name`) REFERENCES `deets` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
