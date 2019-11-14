@@ -79,7 +79,8 @@ if (!(isset($_SESSION["user"]))) {
 							//echo gettype($_SESSION["MovieTime"]);
 							$qry = "Insert into `".$_SESSION["ScrNm"]."` (`Sno`, `bid`, `Time`) VALUES (".$val.", '".$bid."', '".$_SESSION["MovieTime"]."')";
 							$conn->query($qry);
-
+							$strdProcCall = "CALL UpdateForSalesStat(\"".$_SESSION["Movie"]."\")";
+							$conn->query($strdProcCall);
 						}
 						$_SESSION["Seats"] = strval(count($_POST["seat"]));
 						$_SESSION["BkID"] = $bid;

@@ -38,7 +38,7 @@
 	}
 	//echo "Connected successfully <br>";
 
-	$uiderr=$pswderr=$reperr=$nmerr="";
+	$uiderr=$pswderr=$reperr=$nmerr=$btmerr="";
     $uid=$pswd=$RePass=$nm="aa";
     $boo= true; //this is our flag to make sure registration is legit
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -131,7 +131,7 @@
 		    		$prepStmt->bind_param("sss",$usr,$pass,$name);
 		    		//echo "Statement prepared lol <br>";
 		    		$prepStmt->execute();
-		    		echo "Account Created Successfully";
+		    		$GLOBALS["btmerr"] = "Account Created Successfully";
 		    		// else
 		    		// 	echo "Account not Created";
 		    	}//User id is not in use
@@ -143,8 +143,23 @@
     	}//send_data
 	//echo "hello";
     ?>
+
+	<ul>
+	<li><a class="active" href=""> Register an Admin</a></li>
+  <li><a href="addmovie.php">ADD MOVIE</a></li>
+  <li><a href="deletemovie.php">DELETE MOVIE</a></li>
+  <li><a href="deleteshow.php">DELETE SHOW</a></li>
+  <li><a href="AddShow.php">ADD SHOW</a></li>
+  <li><a href="ViewStats.php">VIEW SALES</a></li>
+  <li><a href="logout.php">LOGOUT</a></li>
+
+	</ul>
+
     <div class="container-fluid">
     <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Admin Register</h1></center><br><br><br>
+
+
+    
     <div class="d-flex justify-content-center">
 
     	<div class="pos">
@@ -212,8 +227,15 @@
 
 	</form>
 </div></div>
-</body>
+<div class="row">
+<div class="col-sm"></div>
+<div class="col-sm-3 error">
+	<div class="col-sm"></div>
+	</div>
 <?php
-echo "<br>end of the line"
+echo $btmerr;
 ?>
+</div>
+</body>
+
 </html>

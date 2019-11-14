@@ -117,7 +117,9 @@ if (!(isset($_SESSION["adm"]))) {
   <li><a href="deletemovie.php">DELETE MOVIE</a></li>
   <li><a href="deleteshow.php">DELETE SHOW</a></li>
   <li><a href="admin_reg.php">REGISTER  an ADMIN</a></li>
+  <li><a href="ViewStats.php">VIEW SALES</a></li>
   <li><a href="logout.php">LOGOUT</a></li>
+
 
 
 </ul>
