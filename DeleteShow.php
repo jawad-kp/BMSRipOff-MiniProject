@@ -169,7 +169,7 @@ $(document).ready(function(){
 
 </ul>
 	<div class="container-fluid">
-    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Delete Movie</h1></center><br><br><br>
+    <center><h1 style="color: white; font-size: 40px;" class="fadeInDownBig animated" >Delete Show</h1></center><br><br><br>
     <div class="d-flex justify-content-center">
     
     <div class="pos">
