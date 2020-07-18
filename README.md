@@ -1,7 +1,5 @@
 # BMSRipOff-MiniProject
-This is an open source Movie booking and management software by Jawad Khan and Gaurav Yalamuri fro SJBIT, Bangalore. It's designed in two primary parts:
-	1) The User side
-	2) The Admin side
+This is an open source Movie booking and management software by Jawad Khan and Gaurav Yalamuri from SJBIT, Bangalore. It's designed in two primary parts:				1) The User side																				2) The Admin side
 The User Side let a user view movies available, book them by selecting seats and time and the finally see his bookings
 
 The Admin side allows a site admin to easily add movies, shows, manage bookings and screens and also make any deletions they see fit in a GUI. The intention was to make a simply Movie booking site more accessible to any user who wishes to deploy it.
